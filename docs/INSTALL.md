@@ -5,7 +5,7 @@
 Write Raspberry Pi OS on an SD Card. There are a Plenty of Resources and Tutorials on this Task, so feel free to google it.
 
 At time of writing, Bullseye is the latest. It brings PHP8 and Python3, yay - but we need php 8.1 and at this time 
-(may 2022) its not there.. so we'll install it ourselfes!
+(may 2022) its not there. so we'll install it ourselfes!
 
 ## setup
 
