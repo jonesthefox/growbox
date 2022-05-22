@@ -19,6 +19,10 @@ something with classes, a nice layout and some nifty ittybitty stuff.
 I had a Raspberry PI laying around, so why not order some Sensors, a Neopixel RGBW 64 Matrix, learn python and put it all
 together? 
 
+<img src="docs/assets/making/9.jpg" alt="Living plant" class="w3-image"/>
+
+> And it works!
+
 At the moment i use an old Tupperware like box, about 15x15cm surface and approximately 20cm height. 
 
 The box I have first sprayed from the outside white to increase the light output inside by reflection. 
