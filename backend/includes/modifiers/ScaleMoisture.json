@@ -1,0 +1,9 @@
+{
+  "name": "ScaleMoisture",
+  "delivers": "%",
+  "option": "int,int",
+  "option_name": "dry,wet",
+  "option_default": "3296,1381",
+  "description_de": "Liefert einen Prozentwert ermittelt durch den trocken/nass Wert des CAP-SHYG Bodenfeuchte Sensors",
+  "description_en": "Provides a percentage value determined by the dry/wet value of the CAP-SHYG soil moisture sensor."
+}

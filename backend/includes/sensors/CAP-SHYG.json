@@ -1,0 +1,1 @@
+{"id":"CAP-SHYG","active":"yes","helper":"MCP3008","section":"MOIST","name":"CAP-SHYG Sensor","delivers":"moist","option":"int","option_name":"channel","option_default":"0","modifier":"ScaleMoisture","description_de":"Modul f\u00fcr den CAP-SHYG Analog Bodenfeuchte sensor via MCP3008 Kanal","description_en":"Module for CAP-SHYG Analog soil moisture sensor via MCP3008 channel"}

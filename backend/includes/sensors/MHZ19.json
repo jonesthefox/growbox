@@ -1,0 +1,1 @@
+{"id":"MHZ19","active":"yes","helper":"MHZ19","section":"CO2","name":"MH-Z19 Sensor","delivers":"co2","option":"string","option_name":"serial","option_default":"\/dev\/ttyAMA0","modifier":"","description_de":"Modul f\u00fcr den MHZ-19 co2 Sensor (Seriell)","description_en":"Module for the MHZ-19 co2 sensor (serial)"}

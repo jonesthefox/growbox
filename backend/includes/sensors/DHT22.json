@@ -1,0 +1,1 @@
+{"id":"DHT22","active":"yes","helper":"DHT22","section":"TEMP+RH","name":"DHT22 Sensor","delivers":"temp,rh","option":"int","option_name":"pin","option_default":"11","modifier":"","description_de":"Modul f\u00fcr den DHT22 Temperatur & Luftfeuchtigkeits Sensor.","description_en":"Module for the DHT22 temperature & humidity sensor."}

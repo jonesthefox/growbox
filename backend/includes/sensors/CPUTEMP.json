@@ -1,0 +1,1 @@
+{"id":"CPUTEMP","active":"yes","helper":"CPUTEMP","section":"CPUTEMP","name":"CPU Temp (sysfs)","delivers":"cputemp","option":"string","option_name":"path","option_default":"\/sys\/class\/thermal\/thermal_zone0\/temp","modifier":"","description_de":"Modul f\u00fcr die CPU Temperatur via SYSFS.","description_en":"Module for CPU temperature from SYSFS."}

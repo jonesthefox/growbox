@@ -1,0 +1,59 @@
+{
+  "temp": {
+    "icon": "fa-temperature-half",
+    "name": "temperature",
+    "type": "_SENSOR_TEMP",
+    "type-js": "",
+    "append": "°C"
+  },
+  "rh": {
+    "icon": "fa-cloud",
+    "name": "humidity",
+    "type": "_SENSOR_RH",
+    "type-js": "",
+    "append": "%"
+  },
+  "moist": {
+    "icon": "fa-tint",
+    "name": "moisture",
+    "type": "_SENSOR_MOIST",
+    "type-js": "",
+    "append": "%"
+  },
+  "cputemp": {
+    "icon": "fa-microchip",
+    "name": "cpu",
+    "type": "_SENSOR_CPU",
+    "type-js": "",
+    "append": "°C"
+  },
+  "co2": {
+    "icon": "fa-smog",
+    "name": "co2",
+    "type": "_SENSOR_CO2_HTML",
+    "type-js": "_SENSOR_CO2",
+    "append": "_SENSOR_PPM"
+  },
+  "airrelay": {
+    "icon": "fa-fan",
+    "name": "aironoff",
+    "type": "_SENSOR_AIRONOFF",
+    "type-js": "",
+    "append": ""
+  },
+  "waterrelay": {
+    "icon": "fa-faucet",
+    "name": "aironoff",
+    "type": "_SENSOR_WATERONOFF",
+    "type-js": "",
+    "append": ""
+  },
+  "brightness": {
+    "icon": "fa-sun",
+    "name": "brightness",
+    "type": "_SENSOR_BRIGHTNESS",
+    "type-js": "",
+    "append": "%"
+  }
+}
+

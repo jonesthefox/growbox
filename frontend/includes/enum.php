@@ -1,0 +1,35 @@
+<?php
+
+/** @noinspection PhpUnused */
+
+/** Template.php */
+
+enum TemplateLog
+{
+    case Project;
+    case Cron;
+}
+
+enum Box
+{
+    case startnewproject;
+    case projectbrief;
+    case image;
+    case sensors;
+    case spectrum;
+}
+
+/** Logger.php */
+
+enum LoggerAction
+{
+    case updateConfig;
+    case newProject;
+    case endProject;
+    case changePassword;
+    case rehashPassword;
+    case session;
+    case loginError;
+    case relayToggle;
+    case error;
+}

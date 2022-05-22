@@ -1,0 +1,20 @@
+{
+  "theme": {
+    "id": "skin.growbox",
+    "name": "Growbox Skin",
+    "dir": "default",
+    "provider-name": "fox",
+    "version": "0.9.5",
+    "summary": {
+      "en": "Minimal. Simple.",
+      "de": "Minimal. Simpel."
+    },
+    "description": {
+      "en": "The default skin",
+      "de": "Das standard Skin"
+    },
+    "license": "Creative Commons Attribution Non-Commercial Share-Alike 4.0",
+    "icon": "logo.svg"
+  }
+}
+
