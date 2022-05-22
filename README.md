@@ -64,7 +64,7 @@ Probably it wont break your growbox then, remember to adjust the Heisenberg Comp
 ## Getting started
 
 Download the Tarball, unpack it, run the setup script growbox/scripts/setup/setup.sh 
-You'll find more information in docs/INSTALL ! Then connect to the web frontend and read books 
+You'll find more information in [INSTALL](docs/INSTALL.md) ! Then connect to the web frontend and read books 
 about plant growth and stuff like that. Yay, books :-)
 
 ## Contributing
