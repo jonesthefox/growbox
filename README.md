@@ -21,7 +21,7 @@ together?
 
 <img src="docs/assets/making/9.jpg" alt="Living plant" class="w3-image"/>
 
-> And it works!
+> And it works! You'll find more photos in [MAKING](docs/MAKING.md)
 
 At the moment i use an old Tupperware like box, about 15x15cm surface and approximately 20cm height. 
 
