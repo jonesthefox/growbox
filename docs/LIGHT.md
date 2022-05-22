@@ -24,7 +24,7 @@ the green. ([excerpt from pflanzenforschung.de](https://www.pflanzenforschung.de
 
 below you can see a chart with the relative photosynthesis rates of certain molecules depending on the light wavelength:
 
-<img src="assets/light-rpr.jpg" alt="Relative photosynthesis rate" class="w3-image"/>
+<img src="assets/light/light-rpr.jpg" alt="Relative photosynthesis rate" class="w3-image"/>
 
 Unfortunately i can't remember where this picture was from - so if you are the autor of that picture please don't sue me! 
 get in contact that i can either remove the picture (which would be a pity, because it's informative!)
@@ -32,7 +32,7 @@ or credit you the right way!
 
 Below is a grow spectrum, somewhat explaining the effects of the relative wavelengths:
 
-<img src="assets/light-growspectrum.jpg" alt="Grow spectrum" class="w3-image"/>
+<img src="assets/light/light-growspectrum.jpg" alt="Grow spectrum" class="w3-image"/>
 
 
 Again: unfortunately i can't remember where this picture is from - so if you are the autor of that picture please don't sue me!
@@ -43,7 +43,7 @@ or credit you the right way!
 
 This is the Spectrum from the Datasheet of the Neopixel RGBW natural white (~4500K) 64 matrix:
 
-<img src="assets/light-neopixelspectrum.jpg" alt="Spectrum chart" class="w3-image"/>
+<img src="assets/light/light-neopixelspectrum.jpg" alt="Spectrum chart" class="w3-image"/>
 [adafruit](https://cdn-shop.adafruit.com/product-files/2757/p2757_SK6812RGBW_REV01.pdf)
 
 NW means the light curve of the natural white LED.

@@ -45,6 +45,24 @@ to show a current picture of the plant, to start/stop a project, the overview of
 setting of various parameters like light mode (growphase / bloomphase) light duration, brightness air conditioning, watering
 and many things more.
 
+# Screenshots
+
+Here are some screenshots from the default template.
+
+## Dashboard
+<img src="docs/assets/screenshots/01.jpg" alt="Dashboard" class="w3-image"/>
+
+## Charts
+<img src="docs/assets/screenshots/02.jpg" alt="Charts" class="w3-image"/>
+
+## Archive
+<img src="docs/assets/screenshots/03.jpg" alt="Archive" class="w3-image"/>
+
+## Controlcenter
+<img src="docs/assets/screenshots/04.jpg" alt="Controlcenter" class="w3-image"/>
+
+
+
 # Fair warning:
 
 I can't guarantee that my way of wiring each component makes sense, or if something could explode 
