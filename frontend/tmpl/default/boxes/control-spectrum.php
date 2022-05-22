@@ -5,9 +5,9 @@
 
 <!--suppress HtmlUnknownTarget -->
 <script src="<?=Bootstrap::TEMPLATEDIRHTML;?>/js/chart/chart.js"></script>
-
 <script>
-    let labels = [<?=Cfg::read('light','spectrum_bands');?>];
+
+    let labels = [<?="'". implode("', '",explode(', ',Cfg::read('light','spectrum_bands'))) ."'";?>];
 
     let red = [<?=Cfg::read('light','spectrum_r');?>];
     let green = [<?=Cfg::read('light','spectrum_g');?>];
