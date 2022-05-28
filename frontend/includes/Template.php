@@ -225,16 +225,20 @@ class Template
         $logTableTemplate = file_get_contents(Bootstrap::TEMPLATEDIR . "/box-constructs/log-table.php");
         $logTable = '';
 
-        if ($log == TemplateLog::Project) {
-            $logarray = file(Bootstrap::ROOTPATH . "/log/growbox.log");
-            if ($logarray) {
-                $count = count($logarray) -1;
-                $keycount = count($logarray) - 1;
-                $lines = ($lines > $count) ? $count : $lines;
+        $file = match ($log) {
+            TemplateLog::Project => '../log/growbox.log',
+            TemplateLog::Cron => '../log/cron.log'};
 
-                for ($i = $keycount; $i >= $keycount - $lines; $i--) {
-                    $timestamp = explode(" ", $logarray[$i]);
-                    $logstring = substr($logarray[$i], 20);
+        $logfile = file($file);
+
+        if ($logfile) {
+            $logfile = array_reverse($logfile,true);
+            $logarray = array_slice($logfile, 0,$lines);
+
+            if ($log == TemplateLog::Project) {
+                foreach ($logarray as $value) {
+                    $timestamp = explode(" ", $value);
+                    $logstring = substr($value, 20);
                     $logstring = explode("(", $logstring);
 
                     $idicon = match ($logstring[0]) {
@@ -248,34 +252,24 @@ class Template
                     };
 
                     $logstring = implode("(", $logstring);
-
-                    $logConstruct = $logTableTemplate;
-
                     preg_match('/^[A-Z]+\((.*)\)$/', $logstring, $match);
 
                     $search = array('##date##', '##time##', '##idicon##', '##message##');
                     $replace = array($timestamp[0], $timestamp[1], $idicon, $match[1]);
 
+                    $logConstruct = $logTableTemplate;
                     $logTable .= str_replace($search, $replace, $logConstruct);
                 }
             }
-            else { $logTable = "<tr><td>"._LOGGING_EMPTY."</td></tr>"; }
-        }
 
-        elseif ($log == TemplateLog::Cron) {
-            $logarray = file(Bootstrap::ROOTPATH . "/log/cron.log");
-            if ($logarray) {
-                $count = count($logarray) -1;
-                $lines = ($lines > $count) ? $count : $lines;
-                $keycount = count($logarray) - 1;
-                for ($i = $keycount; $i >= $keycount - $lines; $i--) {
-                    $array = explode(" ", $logarray[$i]);
-                    $line = explode("$array[0] $array[1] ",$logarray[$i]);
-                    $logTable .= "<tr><td>$array[0] $array[1]</td><td>$line[1]</td></tr>";
+                else {
+                    foreach ($logarray as $value) {
+                        $logTable .= "<tr><td>$value</td></tr>";
+                    }
                 }
             }
-            else { $logTable = "<tr><td>"._LOGGING_EMPTY."</td></tr>"; }
-        }
+
+        else { $logTable = "<tr><td>"._LOGGING_EMPTY."</td></tr>"; }
 
         return $logTable;
     }

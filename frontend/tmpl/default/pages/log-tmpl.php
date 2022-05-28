@@ -10,7 +10,7 @@
         <div class="w3-twothird w3-margin-top">
 
     <div class="w3-container w3-card w3-white w3-margin-bottom w3-margin-top w3-round-large">
-        <h1><i class="fa fa-chart-area w3-margin-right"></i><?=_LOGGING;?></h1>
+        <h1><i class="fa fa-clipboard-list w3-margin-right"></i><?=_LOGGING;?></h1>
     </div>
 
     <div class="w3-container w3-card w3-white w3-margin-bottom w3-round-large">

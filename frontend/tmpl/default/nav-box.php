@@ -21,6 +21,8 @@
 
         <?=(Cfg::read('web', 'sandbox') === true) ? '<a href="/sandbox.php" class="w3-bar-item w3-button w3-right"><i class="fa fa-paw"></i></a>' : ''; ?>
 
+        <a href="/log/" class="w3-bar-item w3-button w3-right"><i class="fa fa-clipboard-list"></i></a>
+
         <a href="/control/" class="w3-bar-item w3-button w3-right">
             <i class="fa fa-lightbulb w3-text-<?=Template::lightStatus();?>"></i>
             <i class="fa fa-fan w3-text-<?=Template::relayStatus('air');?>"></i>
@@ -40,7 +42,6 @@
                 <a href="/settings/frontend" class="w3-bar-item w3-button"><i class="fa fa-desktop"></i> <?=_FRONTEND;?></a>
                 <a href="/settings/network" class="w3-bar-item w3-button"><i class="fa fa-wifi"></i> <?=_NETWORK;?></a>
                 <a href="/settings/security" class="w3-bar-item w3-button"><i class="fa fa-key"></i> <?=_LOGIN_SECURITY;?></a>
-                <a href="/log/" class="w3-bar-item w3-button"><i class="fa fa-clipboard-list"></i> <?=_LOGGING;?></a>
                 <a href="/doc/" class="w3-bar-item w3-button"><i class="fa fa-question-circle"></i> <?=_DOC;?></a>
                 <a href="/reboot/" onclick="return confirm('<?=_FORM_WARNING_SURE;?>');" class="w3-bar-item w3-button"><i class="fa fa-rotate"></i> <?=_SYSTEM_REBOOT;?></a>
                 <a href="/shutdown/" onclick="return confirm('<?=_SYSTEM_SHUTDOWN_INFO;?>');" class="w3-bar-item w3-button"><i class="fa fa-power-off"></i> <?=_SYSTEM_SHUTDOWN;?></a>
