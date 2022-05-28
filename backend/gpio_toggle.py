@@ -1,7 +1,8 @@
 #!/bin/python3
 """
 Easy handling for gpio toggling from the frontend. Takes gpio pin as first parameter, state (1 = on / 0 = off) as second.
-If device is not attached, just quit.
+If device is not attached, just quit. because I also use it for testing, it takes gpio pin as parameter and logging
+should be handled by the frontend.
 """
 import configparser
 import RPi.GPIO as GPIO

@@ -139,7 +139,7 @@ def readsensors() -> tuple:
     (i.E. pin number, channel, path..).
 
     the config [sensortype] -> helper is a comma separated string: module,option,modifier,extra_args
-    the modifier is somewhat special, i need it for my cap-shyg analog soil moisture sensor. let's see that line:
+    the modifier is somewhat special, I need it for my cap-shyg analog soil moisture sensor. let's see that line:
 
     helper=MCP3008,0,ScaleMoisture,3296,1381
 
@@ -275,10 +275,10 @@ if __name__ == '__main__':
             sys.exit(0)
 
     elif args.daemon:
-        if not run(DAEMON, pidfile, logfile, DEBUG):
+        if not run(DAEMON, pidfile, DEBUG):
             exit(0)
         else:
-            # sleep 15 sec to let the sensors settle..
+            # sleep 15 sec to let the sensors settle
             time.sleep(15)
             daemon(openshm())
             # runs forever

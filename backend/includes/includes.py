@@ -32,7 +32,7 @@ def logwrite(daemon: str, logfile: str, logwritestring: str) -> None:
     :param logfile: the logfile
     :param logwritestring: the string to write
     """
-    logstring = "{} DAEMON({} {})\n".format(now(), daemon, logwritestring)
+    logstring = "{} DAEMON({}: {})\n".format(now(), daemon, logwritestring)
     with open(logfile, 'a') as logfilehandler:
         logfilehandler.write(str(logstring))
 
@@ -171,14 +171,13 @@ def checkstate(runfile: str, mode: str, state: str = str(0)) -> bool:
             return True
 
 
-def run(daemon: str, pidfile: str, logfile: str, debug: bool) -> bool:
+def run(daemon: str, pidfile: str, debug: bool) -> bool:
     """
     checks if the hardware for the specified daemon is attached, if a project is running and if a daemon already runs.
     returns true when both is yes in config and no daemon is running, false otherwise.
     :rtype: bool
     :param daemon: the daemon
     :param pidfile: the pidfile
-    :param logfile: the logfile
     :param debug: debug switch
     :return: true / false
     """

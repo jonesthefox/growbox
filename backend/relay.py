@@ -205,7 +205,7 @@ if __name__ == '__main__':
         GPIO.setwarnings(False)
         GPIO.setup(RELAY_GPIO, GPIO.OUT)
 
-        if not run(DAEMON, pid, log, DEBUG):
+        if not run(DAEMON, pid, DEBUG):
             exit(0)
 
         else:
