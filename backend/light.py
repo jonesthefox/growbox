@@ -27,8 +27,6 @@ ORDER = str(config['light']['order'])
 
 PIN = int(config['light']['pin'])
 
-pixels = neopixel.NeoPixel(getpin(PIN,returntype='circuitpython'), num_pixels, bpp=4, brightness=1.0, auto_write=False, pixel_order=ORDER)
-
 phase = str(config['plant']['phase'])
 if phase == "grow":
     rgbw = str(config['light']['rgbw_grow'])
@@ -71,6 +69,7 @@ def end(nostore: bool = False) -> None:
     :type nostore: bool set true to disable storing of the state (i.E. when it's already stored by the exception handling)
     :rtype: None
     """
+    pixels = neopixel.NeoPixel(getpin(PIN, returntype='circuitpython'), num_pixels, bpp=4, brightness=1.0, auto_write=False, pixel_order=ORDER)
     debugmessage("exiting now, turning off..", DEBUG)
     pixels.fill((0, 0, 0, 0))
     pixels.show()
@@ -160,12 +159,6 @@ def restore(res: str) -> None:
         end()
 
 
-def rounder(f, mode):
-    if mode == 'up':
-        return math.ceil(f / 2.) * 2
-    elif mode == 'down':
-        return math.floor(f)
-
 def sun(mode: str, red: int = 0, green: int = 0, blue: int = 0, white: int = 0, resume: bool = False, noontime: int = 0) -> None:
     """
     :rtype: None
@@ -178,17 +171,19 @@ def sun(mode: str, red: int = 0, green: int = 0, blue: int = 0, white: int = 0, 
     :param noontime remaining noon time in seconds
     """
 
-    r_inc = int(rounder(r / dim_steps, 'down'))
-    g_inc = int(rounder(g / dim_steps, 'down'))
-    b_inc = int(rounder(b / dim_steps, 'down'))
-    w_inc = int(rounder(w / dim_steps, 'down'))
+    r_inc = int(math.ceil(r / dim_steps))
+    g_inc = int(math.ceil(g / dim_steps))
+    b_inc = int(math.ceil(b / dim_steps))
+    w_inc = int(math.ceil(w / dim_steps))
 
     done = False
+
+    pixels = neopixel.NeoPixel(getpin(PIN, returntype='circuitpython'), num_pixels, bpp=4, brightness=1.0, auto_write=False, pixel_order=ORDER)
 
     if mode == "sunrise":
         """ here we dim the light from 0% to 100% """
         write_state('state', mode)
-        logwrite(DAEMON, logfile, "starting sunrise")
+        logwrite(DAEMON, logfile, "sunrise")
         while not done:
             try:
                 debugmessage("target r: {} g: {} b: {} w: {}".format(r, g, b, w), DEBUG)
@@ -250,6 +245,7 @@ def sun(mode: str, red: int = 0, green: int = 0, blue: int = 0, white: int = 0, 
     elif mode == "sunset":
         """ here we dim the light from 100% to 0% """
         write_state('state', mode)
+        logwrite(DAEMON, logfile, "sunset")
         cooling(0)
         while not done:
             try:
@@ -310,6 +306,7 @@ def sun(mode: str, red: int = 0, green: int = 0, blue: int = 0, white: int = 0, 
     elif mode == "noon":
         write_state('state', mode)
         write_state('brightness', str(100.00))
+        logwrite(DAEMON, logfile, "noon")
         debugmessage("=======================================", DEBUG)
         debugmessage("Noon {} sec.".format(day), DEBUG)
         debugmessage("---------------------------------------", DEBUG)
@@ -364,7 +361,7 @@ def cooling(state: int) -> None:
         elif state == 0:
             cooling_mode = 'off'
 
-        logwrite(DAEMON, logfile, "Cooling turned {}".format(cooling_mode))
+        logwrite(DAEMON, logfile, "cooling {}".format(cooling_mode))
 
 
 if __name__ == '__main__':
@@ -422,9 +419,10 @@ if __name__ == '__main__':
             print("Error: Values must be 0-255")
             sys.exit(1)
 
+        neopixels = neopixel.NeoPixel(getpin(PIN, returntype='circuitpython'), num_pixels, bpp=4, brightness=1.0, auto_write=False, pixel_order=ORDER)
         debugmessage("r: {} g: {} b: {} w: {}".format(r, g, b, w), DEBUG)
-        pixels.fill((r, g, b, w))
-        pixels.show()
+        neopixels.fill((r, g, b, w))
+        neopixels.show()
         write_state('rgbw', "{},{},{},{}".format(r, g, b, w))
         write_state('state', 'noon')
         write_state('brightness', '100.00')
@@ -433,7 +431,7 @@ if __name__ == '__main__':
         sys.exit(0)
 
     elif args.daemon:
-        if run(DAEMON, pidfile, logfile, DEBUG):
+        if run(DAEMON, pidfile, DEBUG):
             # noinspection PyUnboundLocalVariable
             r, g, b, w = tuple([int(i) for i in rgbw.split(",")])
             if not TEST:
@@ -445,12 +443,12 @@ if __name__ == '__main__':
 
             else:
                 # test mode
-                dim = int(90)  # 10 sec
-                dim_step = int(7)  # 1 sec
-                day = int(190) - (2 * dim)  # 25 sec - 2xdim = 5 = daylength w/o sunset/sunrise
+                dim = int(10)  # 10 sec
+                dim_step = int(1)  # 1 sec
+                day = int(25) - (2 * dim)  # 25 sec - 2xdim = 5 = daylength w/o sunset/sunrise
                 sleepuntilstore = int(1)
 
-            dim_steps = rounder(dim / dim_step, 'up')
+            dim_steps = math.ceil(dim / dim_step)
             percent_step = 100 / dim_steps
 
             if args.morning:
