@@ -4,10 +4,16 @@
 
 /** Template.php */
 
-enum TemplateLog
+enum LogFile
 {
     case Project;
     case Cron;
+
+    public function path(): string {
+        return match($this) {
+            LogFile::Project => '../log/growbox.log',
+            LogFile::Cron => '../log/cron.log'};
+    }
 }
 
 enum Box

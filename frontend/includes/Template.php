@@ -1,6 +1,7 @@
 <?php
 
-/** @noinspection HtmlUnknownAttribute
+
+/** @noinspection HtmlUnknownAttribute */
 
 /**
  * The Template class:
@@ -22,9 +23,9 @@ class Template
      *
      * @param $frontendContent string|null (main / archive / control / settings / charts / sensordata / manifest are catched for further logic)
      * @param array|null $backendMessage messageType (info / success / error / nochange / warning), messageText
-     * @return void displays (includes) the template, assembled based on the content setting and messages if needed
+     * @return never displays (includes) the template, assembled based on the content setting and messages if needed, then exit
      */
-    static function show(string $frontendContent = NULL, array $backendMessage = NULL): void
+    static function show(string $frontendContent = NULL, array $backendMessage = NULL): never
     {
         file_exists(Bootstrap::TEMPLATEDIR."/pages/$frontendContent-tmpl.php") ? null : die(Bootstrap::error("Template: file '$frontendContent-tmpl.php' not found"));
 
@@ -33,6 +34,7 @@ class Template
         require(Bootstrap::TEMPLATEDIR."/header-tmpl.php");
         require(Bootstrap::TEMPLATEDIR."/pages/$frontendContent-tmpl.php");
         require(Bootstrap::TEMPLATEDIR."/footer-tmpl.php");
+        exit(0);
     }
     
     /**
@@ -216,26 +218,22 @@ class Template
     /**
      * generates a nice table with log entries
      *
-     * @param TemplateLog $log 'project' or 'cron'
+     * @param LogFile $log 'project' or 'cron'
      * @param int $lines the number of lines to be shown
      * @return string
      */
-    static function generateLog(TemplateLog $log, int $lines=100): string
+    static function generateLog(LogFile $log, int $lines=100): string
     {
         $logTableTemplate = file_get_contents(Bootstrap::TEMPLATEDIR . "/box-constructs/log-table.php");
         $logTable = '';
 
-        $file = match ($log) {
-            TemplateLog::Project => '../log/growbox.log',
-            TemplateLog::Cron => '../log/cron.log'};
-
-        $logfile = file($file);
+        $logfile = file($log->path());
 
         if ($logfile) {
             $logfile = array_reverse($logfile,true);
             $logarray = array_slice($logfile, 0,$lines);
 
-            if ($log == TemplateLog::Project) {
+            if ($log == LogFile::Project) {
                 foreach ($logarray as $value) {
                     $timestamp = explode(" ", $value);
                     $logstring = substr($value, 20);

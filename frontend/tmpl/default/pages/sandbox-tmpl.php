@@ -20,11 +20,6 @@
                 <p><a href="/fail/">trigger error</a></p>
             </div>
 
-            <div class="w3-container w3-card w3-white w3-margin-bottom w3-round-large">
-                <h4><i class="fa fa-chart-area w3-margin-right"></i><?=_LIGHT_SPECTRUM;?></h4>
-                <canvas id="spectrum" width="100%" height="100" class="w3-small"></canvas>
-            </div>
-
             <div class="w3-container w3-card w3-white w3-margin-bottom w3-margin-top w3-round-large">
                 <p><?=_PLACEHOLDER_LONG;?></p>
             </div>

@@ -16,14 +16,14 @@
     <div class="w3-container w3-card w3-white w3-margin-bottom w3-round-large">
         <h3><?=_LOGGING_LOG;?></h3>
         <table class="w3-table w3-striped w3-bordered w3-margin-bottom w3-tiny">
-        <?=Template::generateLog(TemplateLog::Project,intval(Cfg::read('web','logcount')));?>
+        <?=Template::generateLog(LogFile::Project,intval(Cfg::read('web','logcount')));?>
         </table>
     </div>
 
     <div class="w3-container w3-card w3-white w3-margin-bottom w3-round-large">
         <h3><?=_LOGGING_CRON;?></h3>
         <table class="w3-table w3-striped w3-bordered w3-margin-bottom w3-tiny">
-        <?=Template::generateLog(TemplateLog::Cron,intval(Cfg::read('web','logcount')));?>
+        <?=Template::generateLog(LogFile::Cron,intval(Cfg::read('web','logcount')));?>
         </table>
     </div>
     <!-- End Right Column -->
