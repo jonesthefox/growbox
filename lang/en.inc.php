@@ -196,8 +196,10 @@ const _PHOTO_CAMERA_INFO = 'Here you can configure your attached Camera.';
 const _PHOTO_CAMERA_ATTACHED = 'Camera attached';
 const _PHOTO_SHUTTER = 'Shutter speed (ms)';
 const _PHOTO_QUALITY = 'Quality (%)';
-const _PHOTO_WIDTH = 'Image width (px)';
-const _PHOTO_HEIGHT = 'Image height (px)';
+const _PHOTO_WIDTH = 'Timelapse width (px)';
+const _PHOTO_HEIGHT = 'Timelapse height (px)';
+const _PHOTO_FRONTEND_WIDTH = 'Frontend image width (px)';
+const _PHOTO__FRONTEND_HEIGHT = 'Frontend image height (px)';
 const _PHOTO_AWB = 'AWB';
 const _PHOTO_CAMERAAPP = 'Camera application';
 

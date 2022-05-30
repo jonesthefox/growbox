@@ -196,8 +196,10 @@ const _PHOTO_CAMERA_INFO = 'Hier kannst du deine verbundene Kamera konfigurieren
 const _PHOTO_CAMERA_ATTACHED = 'Kamera verbunden';
 const _PHOTO_SHUTTER = 'Shutter speed (ms)';
 const _PHOTO_QUALITY = 'Qualität (%)';
-const _PHOTO_WIDTH = 'Breite (px)';
-const _PHOTO_HEIGHT = 'Höhe (px)';
+const _PHOTO_WIDTH = 'Timelapse Breite (px)';
+const _PHOTO_HEIGHT = 'Timelapse Höhe (px)';
+const _PHOTO_FRONTEND_WIDTH = 'Frontend Bild Breite (px)';
+const _PHOTO_FRONTEND_HEIGHT = 'Frontend Bild Höhe (px)';
 const _PHOTO_AWB = 'AWB';
 const _PHOTO_CAMERAAPP = 'Kamera App';
 

@@ -44,9 +44,9 @@ switch ($frontendContent) {
 
     case "image":
         $camera = "/usr/bin/".Cfg::read('camera','camera');
-        $cameraOptions = "-t 1 -n --width ".Cfg::read('camera','width')." --height ".Cfg::read('camera','height')." --awb ".Cfg::read('camera','awb')." -q ".Cfg::read('camera','quality')." --sharpness 2.0 -o - ";
+        $cameraOptions = "-t 1 -n --width ".Cfg::read('camera','frontend_width')." --height ".Cfg::read('camera','frontend_height')." --awb ".Cfg::read('camera','awb')." -q ".Cfg::read('camera','quality')." --sharpness 5.0 -o - 2>/dev/null";
         header('Content-Type: image/jpeg');
-        exit(gzencode(passthru($camera ." ". $cameraOptions ." 2>/dev/null"), encoding: ZLIB_ENCODING_GZIP));
+        exit(gzencode(passthru($camera ." ". $cameraOptions), encoding: ZLIB_ENCODING_GZIP));
 
     case "archive":
         include("includes/Project.php");
@@ -227,4 +227,3 @@ switch ($frontendContent) {
 }
 
 Template::show($frontendContent, (isset($backendMessage)) ? $backendMessage : NULL);
-session_write_close();

@@ -25,12 +25,20 @@
                 <td><input class="w3-right" type="number" style="width: 80px;" value="<?=Cfg::read('camera','quality');?>" id="camera[quality]" name="camera[quality]" required></td>
             </tr>
             <tr>
-                <td><label for="camera[width]"><?=_PHOTO_WIDTH;?></label></td>
-                <td><input class="w3-right" type="number" style="width: 80px;" value="<?=Cfg::read('camera','width');?>" id="camera[width]" name="camera[width]" required></td>
+                <td><label for="camera[timelapse_width]"><?=_PHOTO_WIDTH;?></label></td>
+                <td><input class="w3-right" type="number" style="width: 80px;" value="<?=Cfg::read('camera','timelapse_width');?>" id="camera[timelapse_width]" name="camera[timelapse_width]" required></td>
             </tr>
             <tr>
-                <td><label for="camera[height]"><?=_PHOTO_HEIGHT;?></label></td>
-                <td><input class="w3-right" type="number" style="width: 80px;" value="<?=Cfg::read('camera','height');?>" id="camera[height]" name="camera[height]" required></td>
+                <td><label for="camera[timelapse_height]"><?=_PHOTO_HEIGHT;?></label></td>
+                <td><input class="w3-right" type="number" style="width: 80px;" value="<?=Cfg::read('camera','timelapse_height');?>" id="camera[timelapse_height]" name="camera[timelapse_height]" required></td>
+            </tr>
+            <tr>
+                <td><label for="camera[frontend_width]"><?=_PHOTO_FRONTEND_WIDTH;?></label></td>
+                <td><input class="w3-right" type="number" style="width: 80px;" value="<?=Cfg::read('camera','frontend_width');?>" id="camera[frontend_width]" name="camera[frontend_width]" required></td>
+            </tr>
+            <tr>
+                <td><label for="camera[frontend_height]"><?=_PHOTO_FRONTEND_HEIGHT;?></label></td>
+                <td><input class="w3-right" type="number" style="width: 80px;" value="<?=Cfg::read('camera','frontend_height');?>" id="camera[frontend_height]" name="camera[frontend_height]" required></td>
             </tr>
             <tr>
                 <td><label for="camera[awb]"><?=_PHOTO_AWB;?></label></td>

@@ -20,8 +20,8 @@ fi
 ID=$(awk -F "=" '/project/ {print $2}' "$CONFIG")
 # SHUTTER=$(awk -F "=" '/shutter/ {print $2}' "$CONFIG")
 QUALITY=$(awk -F "=" '/quality/ {print $2}' "$CONFIG")
-WIDTH=$(awk -F "=" '/width/ {print $2}' "$CONFIG")
-HEIGHT=$(awk -F "=" '/height/ {print $2}' "$CONFIG")
+WIDTH=$(awk -F "=" '/timelapse_width/ {print $2}' "$CONFIG")
+HEIGHT=$(awk -F "=" '/timelapse_height/ {print $2}' "$CONFIG")
 AWB=$(awk -F "=" '/awb/ {print $2}' "$CONFIG")
 CAMERA=$(awk -F "=" '/camera/ {print $2}' "$CONFIG")
 
