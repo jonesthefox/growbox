@@ -40,7 +40,7 @@ class Chart
             $format = ($showdate == 0) ? "H:i" : "Y-m-d H:i";
 
             try { $timestamp = new DateTime(substr(date("c", $array[0]), 0, -6) . "+00:00", new DateTimeZone("UTC")); }
-            catch (Exception $e) { Bootstrap::error($e); }
+            catch (Exception $e) { Bootstrap::error(__CLASS__ .": ".$e->getMessage()); }
 
             $timestamp->setTimezone(new DateTimeZone(date_default_timezone_get()));
             $dataArray["timestamp"] .= "'".$timestamp->format($format)."', ";

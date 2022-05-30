@@ -27,13 +27,14 @@ class Template
      */
     static function show(string $frontendContent = NULL, array $backendMessage = NULL): never
     {
-        file_exists(Bootstrap::TEMPLATEDIR."/pages/$frontendContent-tmpl.php") ? null : die(Bootstrap::error("Template: file '$frontendContent-tmpl.php' not found"));
+        file_exists(Bootstrap::TEMPLATEDIR."/pages/$frontendContent-tmpl.php") ? null : die(Bootstrap::error(__CLASS__ .": file '$frontendContent-tmpl.php' not found"));
 
         (isset($backendMessage)) ? $messageBox = self::message($backendMessage) : 0;
 
         require(Bootstrap::TEMPLATEDIR."/header-tmpl.php");
         require(Bootstrap::TEMPLATEDIR."/pages/$frontendContent-tmpl.php");
         require(Bootstrap::TEMPLATEDIR."/footer-tmpl.php");
+        session_write_close();
         exit(0);
     }
     

@@ -56,7 +56,7 @@ class Bootstrap
     static function boot(): void
     {
         if (is_bool(self::ROOTPATH) || is_bool(self::DB) || is_bool(self::LANGUAGE) || is_bool(self::HTTPHOST))
-        { self::error("Bootstrap: problem reading config.ini"); }
+        { self::error(__CLASS__ .": problem reading config.ini"); }
 
         self::includes();
         self::language();
@@ -101,4 +101,4 @@ class Bootstrap
 }
 
 try { Bootstrap::boot(); }
-catch (Exception $e) { Bootstrap::error($e); }
+catch (Exception $e) { Bootstrap::error(__CLASS__ .": ".$e->getMessage()); }

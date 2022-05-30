@@ -48,7 +48,7 @@ class Project
 
         /* backup config.ini */
         try { copy(Bootstrap::ROOTPATH."/config.ini",Bootstrap::TMPPATH."/config.bak"); }
-        catch (Exception $e) { Bootstrap::error($e->getMessage()); }
+        catch (Exception $e) { Bootstrap::error(__CLASS__ .": ".$e->getMessage()); }
         if (!isset($e)) { $projectMessageString .= _PROJECT_BACKEND_BACKUP_CONFIG."<br>"; }
 
         /* setup config.ini */
@@ -63,27 +63,27 @@ class Project
         }
         catch (Exception $e) {
             try { copy(Bootstrap::TMPPATH."/config.bak",Bootstrap::ROOTPATH."/config.ini"); }
-            catch (Exception $e) { Bootstrap::error($e->getMessage()); }
+            catch (Exception $e) { Bootstrap::error(__CLASS__ .": ".$e->getMessage()); }
             Bootstrap::error($e->getMessage());
         }
         if (!isset($e)) { $cfgMessageString .= $cfgResponse; }
 
         /* setup project directory */
         try { mkdir(Bootstrap::ROOTPATH."/frontend/projects/$projectID"); }
-        catch (Exception $e) { Bootstrap::error($e->getMessage()); }
+        catch (Exception $e) { Bootstrap::error(__CLASS__ .": ".$e->getMessage()); }
         if (!isset($e)) { $projectMessageString .= _PROJECT_BACKEND_NEWPROJECT_MKDIR."<br>"; }
 
         try { copy(Bootstrap::ROOTPATH."/frontend/projects/index.html",Bootstrap::ROOTPATH."/frontend/projects/$projectID/index.html"); }
-        catch (Exception $e) { Bootstrap::error($e->getMessage()); }
+        catch (Exception $e) { Bootstrap::error(__CLASS__ .": ".$e->getMessage()); }
         if (!isset($e)) { $projectMessageString .= _PROJECT_BACKEND_NEWPROJECT_COPY_INDEX."<br>"; }
 
         try { copy(Bootstrap::ROOTPATH."/frontend/projects/default.jpg",Bootstrap::ROOTPATH."/frontend/projects/$projectID/latest.jpg"); }
-        catch (Exception $e) { Bootstrap::error($e->getMessage()); }
+        catch (Exception $e) { Bootstrap::error(__CLASS__ .": ".$e->getMessage()); }
         if (!isset($e)) { $projectMessageString .= _PROJECT_BACKEND_NEWPROJECT_COPY_DEFAULTIMAGE."<br><br>"; }
 
         /* setup database */
         try { copy(Bootstrap::ROOTPATH . "/db/template.sqlite",Bootstrap::DBDIR); }
-        catch (Exception $e) { Bootstrap::error($e->getMessage()); }
+        catch (Exception $e) { Bootstrap::error(__CLASS__ .": ".$e->getMessage()); }
         if (!isset($e)) { $projectMessageString .= _PROJECT_BACKEND_NEWPROJECT_COPY_DEFAULTDB."<br><br>"; }
 
         try {
@@ -103,7 +103,7 @@ class Project
             $sqlStatement->close();
         }
 
-        catch (Exception $e) { Bootstrap::error($e->getMessage()); }
+        catch (Exception $e) { Bootstrap::error(__CLASS__ .": ".$e->getMessage()); }
         if (!isset($e)) {
             $projectMessageString .= _PROJECT_BACKEND_NEWPROJECT_DATABASE."<br><br>";
             $projectMessageString .= _PROJECT_BACKEND_NEWPROJECT_CREATED."<br><br>";
@@ -118,7 +118,7 @@ class Project
 
         /* remove config.ini backup */
         try { unlink(Bootstrap::TMPPATH."/config.bak"); }
-        catch (Exception $e) { Bootstrap::error($e->getMessage()); }
+        catch (Exception $e) { Bootstrap::error(__CLASS__ .": ".$e->getMessage()); }
         if (!isset($e)) { $projectMessageString .= _PROJECT_BACKEND_BACKUP_CONFIG_REMOVED."<br>"; }
 
         ($projectMessageString != "") ? $message[] = array("messageType" => 'success', "messageText" => $projectMessageString) : 0;
@@ -172,22 +172,22 @@ class Project
             $sqlStatement->close();
         }
 
-        catch (Exception $e) { Bootstrap::error($e->getMessage()); }
+        catch (Exception $e) { Bootstrap::error(__CLASS__ .": ".$e->getMessage()); }
         if (!isset($e)) { $projectMessageString .= _PROJECT_BACKEND_DONE_DB."<br><br>"; }
 
         try { exec(Bootstrap::ROOTPATH . "/scripts/wrapper/last_shot_and_timelapse_suid_wrapper"); }
-        catch (Exception $e) { Bootstrap::error($e->getMessage()); }
+        catch (Exception $e) { Bootstrap::error(__CLASS__ .": ".$e->getMessage()); }
         if (!isset($e)) { $projectMessageString .= _PROJECT_BACKEND_DONE_MULTIMEDIA."<br><br>"; }
 
         try { $cfgResponse = Cfg::write('plant','active','offline', FALSE); }
-        catch (Exception $e) { Bootstrap::error($e->getMessage()); }
+        catch (Exception $e) { Bootstrap::error(__CLASS__ .": ".$e->getMessage()); }
         if (!isset($e)) { $cfgMessageString .= $cfgResponse; $projectMessageString .= _PROJECT_BACKEND_DONE_CONFIG; }
 
         try {
             rename(Bootstrap::ROOTPATH."/projects/".$projectID,Bootstrap::ROOTPATH."/projects/old/".$projectID);
             rename(Bootstrap::DBDIR,Bootstrap::ROOTPATH."/projects/old/".$projectID."/".Bootstrap::DB);
         }
-        catch (Exception $e) { Bootstrap::error($e->getMessage()); }
+        catch (Exception $e) { Bootstrap::error(__CLASS__ .": ".$e->getMessage()); }
         if (!isset($e)) { $cfgMessageString .= $cfgResponse; $projectMessageString .= _PROJECT_BACKEND_DONE_FS; }
 
         include("includes/Logger.php");
@@ -224,7 +224,7 @@ class Project
     static function daysrunning(string $startDate, string $endDate) : string
     {
         try { return (new DateTime($startDate))->diff(new DateTime($endDate))->days; }
-        catch (Exception $e) { Bootstrap::error($e); }
+        catch (Exception $e) { Bootstrap::error(__CLASS__ .": ".$e->getMessage()); }
     }
 
     /**

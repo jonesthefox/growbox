@@ -63,10 +63,10 @@ class Cfg
                 }
 
                 if (!file_put_contents(self::$configFile, $configDataNew))
-                { die(Bootstrap::error('Cfg: can not write config.ini. please check file permissions or run scripts/setup/file_permissions.sh<br>')); }
+                { die(Bootstrap::error(__CLASS__ .': can not write config.ini. please check file permissions or run scripts/setup/file_permissions.sh<br>')); }
 
                 else {
-                    if ($logWrite) { if (!class_exists('Logger')) { include("includes/Logger.php"); }
+                    if ($logWrite) { if (!class_exists('Logger')) { include('includes/Logger.php'); }
                         Logger::write(LoggerAction::updateConfig, array("configSection" => $configSection, "configKey" => $configKey, "configValueOld" => $configValueOld, "configValueNew" => $configValueNew));
                     }
                     return "[$configSection] =&gt; $configKey = $configValueNew<br>";
