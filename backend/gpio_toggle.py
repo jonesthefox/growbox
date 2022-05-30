@@ -23,6 +23,9 @@ if gpio == int(config['air']['pin']):
 elif gpio == int(config['water']['pin']):
     element = str('water')
 
+elif gpio == int(config['cooling']['pin']):
+    element = str('cooling')
+
 if config[element]['attached'] == 'no':
     exit(0)
 
