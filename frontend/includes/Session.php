@@ -3,7 +3,7 @@
 define('cookieParams', array(
     'lifetime' => time() + 600,
     'path' => '/',
-    'domain' => Cfg::read('default', 'hostname'),
+    'domain' => $_SERVER["HTTP_HOST"],
     'secure' => false,
     'httponly' => true,
     'samesite' => 'strict'));
