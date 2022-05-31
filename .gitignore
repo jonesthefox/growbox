@@ -1,3 +1,5 @@
 .idea
 /.passwd
 /config.ini
+/frontend/sandbox.php
+/frontend/tmpl/default/pages/sandbox-tmpl.php
