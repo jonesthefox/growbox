@@ -1,22 +1,22 @@
 # growbox cronjobs
 
 # Write sensordata every 10 Minutes to sqlite
-0,10,20,30,40,50 * * * * root /home/fox/growbox/backend/sensors.py -db 2>&1 | /home/fox/growbox/scripts/sh/timestamp.sh >> /home/fox/growbox/log/cron.log
+0,10,20,30,40,50 * * * * root /home/fox/growbox/backend/sensors -db 2>&1 | /home/fox/growbox/scripts/sh/timestamp.sh >> /home/fox/growbox/log/cron.log
 
 # try to start sensordaemon every 10 Minutes
-*/10 * * * * root /home/fox/growbox/backend/sensors.py -d 2>&1 | /home/fox/growbox/scripts/sh/timestamp.sh >> /home/fox/growbox/log/cron.log
+*/10 * * * * root /home/fox/growbox/backend/sensors -d 2>&1 | /home/fox/growbox/scripts/sh/timestamp.sh >> /home/fox/growbox/log/cron.log
 
 # start sensordaemon on reboot
-@reboot root /home/fox/growbox/backend/sensors.py -d 2>&1 | /home/fox/growbox/scripts/sh/timestamp.sh >> /home/fox/growbox/log/cron.log
+@reboot root /home/fox/growbox/backend/sensors -d 2>&1 | /home/fox/growbox/scripts/sh/timestamp.sh >> /home/fox/growbox/log/cron.log
 
 # Turn the Light on, every Day 7:00
-0 7 * * * root /home/fox/growbox/backend/light.py -d -m 2>&1 | /home/fox/growbox/scripts/sh/timestamp.sh >> /home/fox/growbox/log/cron.log
+0 7 * * * root /home/fox/growbox/backend/light -d -m 2>&1 | /home/fox/growbox/scripts/sh/timestamp.sh >> /home/fox/growbox/log/cron.log
 
 # start lightdaemon on reboot
-@reboot root /home/fox/growbox/backend/light.py -d 2>&1 | /home/fox/growbox/scripts/sh/timestamp.sh >> /home/fox/growbox/log/cron.log
+@reboot root /home/fox/growbox/backend/light -d 2>&1 | /home/fox/growbox/scripts/sh/timestamp.sh >> /home/fox/growbox/log/cron.log
 
 # check if lightdaemon should run every 10 minutes
-*/10 * * * * root /home/fox/growbox/backend/light.py -d 2>&1 | /home/fox/growbox/scripts/sh/timestamp.sh >> /home/fox/growbox/log/cron.log
+*/10 * * * * root /home/fox/growbox/backend/light -d 2>&1 | /home/fox/growbox/scripts/sh/timestamp.sh >> /home/fox/growbox/log/cron.log
 
 # Make Foto every 2 Hours
 0 */2 * * * root /home/fox/growbox/scripts/sh/camera.sh 2>&1 | /home/fox/growbox/scripts/sh/timestamp.sh >> /home/fox/growbox/log/cron.log
@@ -26,13 +26,13 @@
 # FLOOD!
 
 # try to start relay daemon (air) every 10 minutes
-#*/10 * * * * root /home/fox/growbox/backend/relay.py -d air 2>&1 | /home/fox/growbox/scripts/sh/timestamp.sh >> /home/fox/growbox/log/cron.log
+#*/10 * * * * root /home/fox/growbox/backend/relay -d air 2>&1 | /home/fox/growbox/scripts/sh/timestamp.sh >> /home/fox/growbox/log/cron.log
 
 # start relay daemon (air) on reboot
-#@reboot root /home/fox/growbox/backend/relay.py -d air 2>&1 | /home/fox/growbox/scripts/sh/timestamp.sh >> /home/fox/growbox/log/cron.log
+#@reboot root /home/fox/growbox/backend/relay -d air 2>&1 | /home/fox/growbox/scripts/sh/timestamp.sh >> /home/fox/growbox/log/cron.log
 
 # try to start relay daemon (water) every 10 minutes
-#*/10 * * * * root /home/fox/growbox/backend/relay.py -d water 2>&1 | /home/fox/growbox/scripts/sh/timestamp.sh >> /home/fox/growbox/log/cron.log
+#*/10 * * * * root /home/fox/growbox/backend/relay -d water 2>&1 | /home/fox/growbox/scripts/sh/timestamp.sh >> /home/fox/growbox/log/cron.log
 
 # start relay daemon (water) on reboot
-#@reboot root /home/fox/growbox/backend/relay.py -d water 2>&1 | /home/fox/growbox/scripts/sh/timestamp.sh >> /home/fox/growbox/log/cron.log
+#@reboot root /home/fox/growbox/backend/relay -d water 2>&1 | /home/fox/growbox/scripts/sh/timestamp.sh >> /home/fox/growbox/log/cron.log

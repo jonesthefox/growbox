@@ -10,6 +10,7 @@ import sysv_ipc
 
 from microcontroller import Pin
 
+
 def handle_exit(sig, frame):
     _ = sig, frame
     raise SystemExit
@@ -25,14 +26,20 @@ def debugmessage(debugstring: str, debug: bool) -> None:
         print(debugstring)
 
 
-def logwrite(daemon: str, logfile: str, logwritestring: str) -> None:
+def logwrite(daemon: str, logfile: str, logwritestring: str, cli: bool = False) -> None:
     """ writes to the logfile (daemon start / stop and stuff)
     :rtype: None
     :param daemon: the daemon
     :param logfile: the logfile
     :param logwritestring: the string to write
+    :param cli: changes the logstring when true
     """
-    logstring = "{} DAEMON({}: {})\n".format(now(), daemon, logwritestring)
+
+    if not cli:
+        logstring = "{} DAEMON({}: {})\n".format(now(), daemon, logwritestring)
+    else:
+        logstring = "{} CLI({})\n".format(now(), logwritestring)
+
     with open(logfile, 'a') as logfilehandler:
         logfilehandler.write(str(logstring))
 
@@ -98,7 +105,7 @@ def now(time: bool = False, timezone: str = "local", as_tuple: bool = False) -> 
             return result
 
 
-def readshm(shmid: int) -> tuple[str, float, float, float, float, int]:
+def readshm(shmid: int) -> str:
     """
     reads the binary sensordata from SHM
     :rtype: tuple

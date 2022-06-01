@@ -11,8 +11,8 @@ ls -lah "$ROOTPATH"/config.ini
 chmod 766 "$ROOTPATH"/sensors.ini
 ls -lah "$ROOTPATH"/sensors.ini
 
-chmod +x "$ROOTPATH"/backend/*.py
-ls -lah "$ROOTPATH"/backend/*.py
+chmod +x "$ROOTPATH"/backend/*
+ls -lah "$ROOTPATH"/backend/*
 
 sudo chown www-data.www-data "$ROOTPATH"/.passwd
 chmod 666 "$ROOTPATH"/.passwd

@@ -247,6 +247,7 @@ class Template
                         "LOGON" => "fa-user",
                         "TOGGLE" => "fa-toggle-off",
                         "ERROR" => "fa-circle-exclamation",
+                        "CLI" => "fa-terminal",
                         default => "fa-circle-question"
                     };
 
