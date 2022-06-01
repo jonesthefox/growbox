@@ -34,17 +34,26 @@
 
     <div class="w3-container w3-card w3-margin-bottom w3-round-large">
         <div class="w3-tag w3-white w3-right w3-margin-top" onclick="showHelp(2)"><i class="fa fa-question-circle"></i></div>
-        <form name="humidity" action="/settings/<?=$GLOBALS['settingsBox'];?>" onsubmit="return confirm('<?=_FORM_WARNING_SURE;?>');" method="POST" enctype="multipart/form-data">
+        <form name="options" action="/settings/<?=$GLOBALS['settingsBox'];?>" onsubmit="return confirm('<?=_FORM_WARNING_SURE;?>');" method="POST" enctype="multipart/form-data">
             <h4><i class="fa fa-cloud-rain w3-margin-right"></i><?=_SENSOR_RH;?></h4>
             <p class="w3-pale-yellow w3-border w3-padding w3-round-large" id="2" style="display: none" onclick="showHelp(2)"><i class="fa fa-info-circle w3-text-blue w3-large w3-cell-middle"></i> <i><small><?=_AIR_RH_INFO;?></small></i></p>
             <table class="w3-table w3-small">
                 <tr>
+                    <td><label for="air[relay_mode]"><?=_SETTINGS_MODE;?></label></td>
+                    <td>
+                        <select class="w3-right" name="air[relay_mode]" id="air[relay_mode]">
+                            <option value="max-on" <?=(Cfg::read('air','relay_mode') === "max-on") ? "selected" : "";?>><?=_SETTINGS_MAXON;?></option>
+                            <option value="max-off" <?=(Cfg::read('air','relay_mode') === "max-off") ? "selected" : "";?>><?=_SETTINGS_MAXOFF;?></option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
                     <td><label for="air[min]"><?=_AIR_RH_SETTING_MIN;?></label></td>
-                    <td><input class="w3-right" type="number" min="0" max="100" style="width: 80px;" value="<?=Cfg::read('air','min');?>" id="air[min]" name="air[min]" required></td>
+                    <td><input class="w3-right" type="number" min="0" max="100" step="0.1" style="width: 80px;" value="<?=Cfg::read('air','min');?>" id="air[min]" name="air[min]" required></td>
                 </tr>
                 <tr>
                     <td><label for="air[max]"><?=_AIR_RH_SETTING_MAX;?></label></td>
-                    <td> <input class="w3-right" type="number" min="0" max="100" style="width: 80px;" value="<?=Cfg::read('air','max');?>" id="air[max]" name="air[max]" required></td>
+                    <td> <input class="w3-right" type="number" min="0" max="100" step="0.1" style="width: 80px;" value="<?=Cfg::read('air','max');?>" id="air[max]" name="air[max]" required></td>
                 </tr>
                 <tr>
                     <td><label for="air[quiet_hours]"><?=_AIR_QUIETHOURS;?></label></td>

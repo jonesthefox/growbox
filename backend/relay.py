@@ -2,8 +2,12 @@
 
 import argparse
 import configparser
+from typing import Union
+
 import RPi.GPIO as GPIO
 from datetime import datetime, time
+
+from microcontroller import Pin
 
 from includes.includes import checkstate
 from includes.includes import configfile
@@ -85,11 +89,12 @@ def off(element: str, gpio: int, runfile: str, logfile: str, debug: bool):
     debugmessage("Relay stopped", debug)
 
 
-def daemon(element: str, pidfile: str, runfile: str, logfile: str) -> None:
+def daemon(element: str, pin: Union[Pin, Pin, Pin, Pin, Pin, Pin, Pin, int], pidfile: str, runfile: str, logfile: str) -> None:
     """
     main loop for daemon. checks every sleep_between_readings seconds (config.ini) the sensordata in shm and turn the relay on/off
 
     :param element: the element to control. water/air
+    :param pin: the pin number on the raspberry
     :param pidfile: the pidfile
     :param runfile: the runfile
     :param logfile: the logfile
@@ -105,22 +110,24 @@ def daemon(element: str, pidfile: str, runfile: str, logfile: str) -> None:
             sensordata = sensordata.split(' ')
             config.read(configfile())
 
+            index = int(config[element]['index'])
+            mode = config[DAEMON]['relay_mode']
+            quiet_hours = config[DAEMON]['quiet_hours'].split(',')
 
-            if element == "water":
-                index = int(config['water']['index'])
+            if mode == "max-off":
                 debugmessage("{} measured value={} threshold min={}, threshold max={}".format(sensordata[0], sensordata[index], config[DAEMON]['min'], config[DAEMON]['max']), DEBUG)
-                if not quiethours(datetime.now().time(), time(int(quiet_hours_water[0])), time(int(quiet_hours_water[1]))):
-                    if float(sensordata[index]) < float(config[DAEMON]['min']):
+                if not quiethours(datetime.now().time(), time(int(quiet_hours[0])), time(int(quiet_hours[1]))):
+                    if float(sensordata[index]) < float(config[element]['min']):
                         if not checkstate(runfile, "r"):
                             debugmessage("Relay off, turning on now because measured value={} (threshold={})".format(sensordata[index], config[DAEMON]['min']), DEBUG)
-                            on(element, RELAY_GPIO, runfile, logfile, DEBUG)
+                            on(element, pin, runfile, logfile, DEBUG)
                         else:
                             debugmessage("Relay already on", DEBUG)
 
-                    elif float(sensordata[index]) > float(config[DAEMON]['max']):
+                    elif float(sensordata[index]) > float(config[element]['max']):
                         if checkstate(runfile, "r"):
                             debugmessage("Turning Relay off now because measured value={} (threshold={})".format(sensordata[index], config[DAEMON]['max']), DEBUG)
-                            off(element, RELAY_GPIO, runfile, logfile, DEBUG)
+                            off(element, pin, runfile, logfile, DEBUG)
                         else:
                             debugmessage("Relay already off", DEBUG)
                 else:
@@ -128,21 +135,20 @@ def daemon(element: str, pidfile: str, runfile: str, logfile: str) -> None:
                         off(element, RELAY_GPIO, runfile, logfile, DEBUG)
                     debugmessage("No action (quiet hour)", DEBUG)
 
-            elif element == "air":
-                index = int(config['air']['index'])
+            elif mode == "max-on":
                 debugmessage("{} measured value={} threshold min={}, threshold max={}".format(sensordata[0], sensordata[index], config[DAEMON]['min'], config[DAEMON]['max']), DEBUG)
-                if not quiethours(datetime.now().time(), time(int(quiet_hours_air[0])), time(int(quiet_hours_air[1]))):
-                    if float(sensordata[index]) > float(config[DAEMON]['max']):
+                if not quiethours(datetime.now().time(), time(int(quiet_hours[0])), time(int(quiet_hours[1]))):
+                    if float(sensordata[index]) > float(config[element]['max']):
                         if not checkstate(runfile, "r"):
                             debugmessage("Relay off, turning on now because measured value={} (threshold={})".format(sensordata[index], config[DAEMON]['max']), DEBUG)
-                            on(element, RELAY_GPIO, runfile, logfile, DEBUG)
+                            on(element, pin, runfile, logfile, DEBUG)
                         else:
                             debugmessage("Relay already on", DEBUG)
 
-                    elif float(sensordata[index]) < float(config[DAEMON]['min']):
+                    elif float(sensordata[index]) < float(config[element]['min']):
                         if checkstate(runfile, "r"):
                             debugmessage("Turning Relay off now  because measured value={} (threshold={})".format(sensordata[index], config[DAEMON]['min']), DEBUG)
-                            off(element, RELAY_GPIO, runfile, logfile, DEBUG)
+                            off(element, pin, runfile, logfile, DEBUG)
                         else:
                             debugmessage("Relay already off", DEBUG)
                 else:
@@ -174,8 +180,8 @@ if __name__ == '__main__':
                         help='''debug increase output verbosity to stdout. don't do that in production.''')
 
     group.add_argument("-d", "--daemon",
-                       type=str, choices=["air", "water"],
-                       help='''starts the relay daemon with control of the chosen element''')
+                       type=str, choices=["air", "water", "temperature"],
+                       help='''starts the relay daemon with control of the chosen element (air controls ventilation, water controls the pump and cooling controls the cooling of the light emitting device).''')
 
     if len(sys.argv) == 1:
         parser.print_help(sys.stderr)
@@ -193,11 +199,6 @@ if __name__ == '__main__':
         config = configparser.ConfigParser()
         config.read(configfile())
 
-        quiet_hours_air = config['air']['quiet_hours']
-        quiet_hours_air = quiet_hours_air.split(',')
-        quiet_hours_water = config['water']['quiet_hours']
-        quiet_hours_water = quiet_hours_water.split(',')
-
         pid, runf, log, sensordaemon_id, sleep_between_readings = setup(DAEMON)
 
         GPIO.setmode(GPIO.BCM)
@@ -213,7 +214,7 @@ if __name__ == '__main__':
             # to ensure we can read something from shm in case of a reboot
             debugmessage("Sleeping 5 seconds to ensure there is data in SHM..", DEBUG)
             sleep(5)
-            daemon(DAEMON, pid, runf, log)
+            daemon(DAEMON, RELAY_GPIO, pid, runf, log)
             # runs forever
 
         exit(0)

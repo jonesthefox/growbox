@@ -126,22 +126,11 @@ const _LOGIN_LOGOUT_SUCCESSFUL = 'Logout successful. Bye!';
 
 /* settings */
 const _SETTINGS = 'Settings';
-const _SETTINGS_GPIO = 'GPIO Pin';
+const _SETTINGS_GPIO = 'Pin';
 const _SETTINGS_ATTACHED = 'Hardware attached';
-
-/* air */
-const _AIR = 'Air';
-const _AIR_INDEX = 'The position of the relative humidity value in the sensordata';
-const _AIR_RH_INFO = 'Set the desired humidity. Above the desired value, the ventilation will be activated.<br>Set the time in the deactivation schedule, when the daemon does not switch the relay (e.g. if the noise disturbs your plants while sleeping). Format: hours, comma separated. 0,11 = 0:00 - 11:00';
-const _AIR_RH_SETTING_MIN = 'RH Minimum %';
-const _AIR_RH_SETTING_MAX = 'RH Maximum %';
-const _AIR_VENTILATION = 'Ventilation';
-const _AIR_VENTILATION_INFO = 'Change ventilation Settings, the GPIO pin number of your raspberry and the index of the relative humidity in the <a href="/doc/#SENSORS">sensordata</a>.';
-const _AIR_QUIETHOURS = 'Deactivation schedule';
-
-/* cooling */
-const _COOLING = 'Light Cooling';
-const _COOLING_INFO = 'LED lights may get really hot, to expand lifetime you should attach a heatsink and a fan - which you can configure here.';
+const _SETTINGS_MODE = 'Mode';
+const _SETTINGS_MAXON = 'On when maximum value';
+const _SETTINGS_MAXOFF = 'Off when maximum value';
 
 /* frontend */
 const _FRONTEND = 'Frontend';
@@ -181,6 +170,8 @@ const _LIGHT_OPTIONS = 'Options';
 const _LIGHT_SLEEPUNTILSTORE = 'Cache (seconds)';
 const _LIGHT_SLEEPUNTILSTORE_INFO = 'Here you can set how many seconds to wait until the remaining time of the day mode is saved.';
 const _LIGHT_SPECTRUM = 'Spectrum (approximation)';
+const _LIGHT_COOLING = 'Light Cooling';
+const _LIGHT_COOLING_INFO = 'LED lights may get really hot, to expand lifetime you should attach a heatsink and a fan - which you can configure here.';
 
 /* network */
 const _NETWORK = 'Netzwork';
@@ -223,6 +214,16 @@ const _SENSORS_CHANNEL = 'Channel';
 const _SENSORS_SERIAL = 'Serial Port';
 const _SENSORS_PATH = 'Path';
 
+/* air */
+const _AIR = 'Air';
+const _AIR_INDEX = 'The position of the relative humidity value in the sensordata';
+const _AIR_RH_INFO = 'Set the desired humidity. Above the desired value, the ventilation will be activated.<br>Set the time in the deactivation schedule, when the daemon does not switch the relay (e.g. if the noise disturbs your plants while sleeping). Format: hours, comma separated. 0,11 = 0:00 - 11:00';
+const _AIR_RH_SETTING_MIN = 'RH Minimum %';
+const _AIR_RH_SETTING_MAX = 'RH Maximum %';
+const _AIR_VENTILATION = 'Ventilation';
+const _AIR_VENTILATION_INFO = 'Change ventilation Settings, the GPIO pin number of your raspberry and the index of the relative humidity in the <a href="/doc/#SENSORS">sensordata</a>.';
+const _AIR_QUIETHOURS = 'Deactivation schedule';
+
 /* water */
 const _WATER = 'Water';
 const _WATER_INDEX = 'The position of the soil moisture value in the sensordata';
@@ -233,6 +234,17 @@ const _WATER_MOIST_MAX = 'Maximum (in %)<br><small>(the watering stops)</small>'
 const _WATER_WATERING = 'Watering';
 const _WATER_WATERING_INFO = 'Change watering settings, the GPIO pin number of your raspberry and the index of the soil moisture value in the <a href="/doc/#SENSORS">sensordata</a>.';
 const _WATER_QUIETHOURS = 'Deactivation schedule';
+
+/* temperature */
+const _TEMPERATURE = 'Temperature';
+const _TEMPERATURE_INDEX = 'The position of the temperature value in the sensordata';
+const _TEMPERATURE_MINMAX = 'Min-/maximum values';
+const _TEMPERATURE_MINMAX_INFO = 'Here you can adjust cooling settings, based on the temperature sensore value.<br>Set the time in the deactivation schedule, when the daemon does not switch the relay (e.g. if the noise disturbs your plants while sleeping). Format: hours, comma separated. 0,11 = 0:00 - 11:00';
+const _TEMPERATURE_TEMP_MIN = 'Minimum (in &deg;C)<br><small>(the cooling stops)</small>';
+const _TEMPERATURE_TEMP_MAX = 'Maximum (in &deg;C)<br><small>(reaching this value triggers the cooling)</small>';
+const _TEMPERATURE_COOLING = 'Cooling';
+const _TEMPERATURE_COOLING_INFO = 'Change cooling settings, the GPIO pin number of your raspberry and the index of the soil moisture value in the <a href="/doc/#SENSORS">sensordata</a>.';
+const _TEMPERATURE_QUIETHOURS = 'Deactivation schedule';
 
 /* doc */
 const _DOC = 'Documentation';

@@ -26,6 +26,7 @@
         <a href="/control/" class="w3-bar-item w3-button w3-right">
             <i class="fa fa-lightbulb w3-text-<?=Template::lightStatus();?>"></i>
             <i class="fa fa-fan w3-text-<?=Template::relayStatus('air');?>"></i>
+            <i class="fa fa-thermometer-half w3-text-<?=Template::relayStatus('temperature');?>"></i>
             <i class="fa fa-faucet w3-text-<?=Template::relayStatus('water');?>"></i>
         </a>
 
@@ -38,6 +39,7 @@
                 <a href="/settings/light" class="w3-bar-item w3-button"><i class="fa fa-sun"></i> <?=_LIGHT;?></a>
                 <a href="/settings/water" class="w3-bar-item w3-button"><i class="fa fa-water"></i> <?=_WATER;?></a>
                 <a href="/settings/air" class="w3-bar-item w3-button"><i class="fa fa-wind"></i> <?=_AIR;?></a>
+                <a href="/settings/temperature" class="w3-bar-item w3-button"><i class="fa fa-thermometer-half"></i> <?=_TEMPERATURE;?></a>
                 <a href="/settings/photo" class="w3-bar-item w3-button"><i class="fa fa-image"></i> <?=_PHOTO;?></a>
                 <a href="/settings/frontend" class="w3-bar-item w3-button"><i class="fa fa-desktop"></i> <?=_FRONTEND;?></a>
                 <a href="/settings/network" class="w3-bar-item w3-button"><i class="fa fa-wifi"></i> <?=_NETWORK;?></a>

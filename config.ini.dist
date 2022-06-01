@@ -25,7 +25,7 @@ retrytime=1
 [light]
 attached=yes
 pin=12
-rgbw_grow=200,0,200,200
+rgbw_grow=200,0,200,255
 rgbw_bloom=255,0,0,50
 day=57600
 night=28800
@@ -39,12 +39,22 @@ spectrum_r=0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 100, 0
 spectrum_g=0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 100, 100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
 spectrum_b=0, 0, 0, 0, 0, 100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
 spectrum_w=0, 5, 25, 40, 62, 52, 30, 18, 13, 11, 12, 20, 30, 35, 45, 53, 59, 67, 70, 72, 71, 68, 65, 60, 42, 30, 25, 18, 15, 10, 8, 7, 5, 3, 2, 0, 0, 0, 0, 0
-[cooling]
-attached=yes
+[lightcooling]
+attached=no
 pin=13
-gpio=15
+[temperature]
+attached=no
+pin=13
+index=2
+min=28
+max=28.5
+pidfile=temperature.pid
+runfile=temperature.run
+sleep_between_readings=20
+quiet_hours=0,9
+relay_mode=max-on
 [air]
-attached=yes
+attached=no
 pin=15
 min=65
 max=70
@@ -52,7 +62,8 @@ index=3
 pidfile=air.pid
 runfile=air.run
 sleep_between_readings=10
-quiet_hours=0,11
+quiet_hours=0,9
+relay_mode=max-on
 [water]
 attached=no
 pin=0
@@ -62,16 +73,16 @@ max=40
 pidfile=water.pid
 runfile=water.run
 sleep_between_readings=10
-quiet_hours=0,11
-gpio=13
+quiet_hours=0,9
+relay_mode=max-off
 [plant]
 active=no
 project=
 species=
-phase=grow
+phase=
 startdate=
 [camera]
-attached=yes
+attached=no
 shutter=750
 quality=100
 timelapse_width=1600

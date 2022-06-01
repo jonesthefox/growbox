@@ -363,6 +363,6 @@ class Template
     {
         $json = json_decode(file_get_contents(Bootstrap::TMPPATH."/sun.run"), true, flags: JSON_OBJECT_AS_ARRAY);
 
-        return ($json['rgbw'] != "0,0,0,0") ? (file_get_contents(Bootstrap::TMPPATH."/cooling.run") === '1') ? 'blue' : 'green' : 'red';
+        return ($json['rgbw'] != "0,0,0,0") ? (file_get_contents(Bootstrap::TMPPATH."/temperature.run") === '1') ? 'blue' : 'green' : 'red';
     }
 }

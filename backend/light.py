@@ -346,22 +346,22 @@ def cooling(state: int) -> None:
     :rtype: None
     :param state: 1=on 0=off
     """
-    if config['cooling']['attached'] == 'yes':
+    if config['lightcooling']['attached'] == 'yes':
 
         GPIO.setmode(GPIO.BCM)
 
-        relaypin = getpin(int(config['cooling']['pin']), returntype='bcm')
+        relaypin = getpin(int(config['lightcooling']['pin']), returntype='bcm')
         GPIO.setwarnings(False)
         GPIO.setup(relaypin, GPIO.OUT)
 
         GPIO.output(relaypin, state)
         checkstate(cooling_runfile, 'w', str(state))
         if state == 1:
-            cooling_mode = 'on'
+            mode = 'on'
         elif state == 0:
-            cooling_mode = 'off'
+            mode = 'off'
 
-        logwrite(DAEMON, logfile, "cooling {}".format(cooling_mode))
+        logwrite(DAEMON, logfile, "cooling {}".format(mode))
 
 
 if __name__ == '__main__':

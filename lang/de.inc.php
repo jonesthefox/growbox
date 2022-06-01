@@ -126,22 +126,11 @@ const _LOGIN_LOGOUT_SUCCESSFUL = 'Logout erfolgreich. Tschüss!';
 
 /* settings */
 const _SETTINGS = 'Einstellungen';
-const _SETTINGS_GPIO = 'GPIO Pin';
+const _SETTINGS_GPIO = 'Pin';
 const _SETTINGS_ATTACHED = 'Hardware verbunden';
-
-/* air */
-const _AIR = 'Luft';
-const _AIR_INDEX = 'Die Position des Wertes der relativen Luftfeuchtigkeit in den Sensordaten';
-const _AIR_RH_INFO = 'Stelle die gewünschte maximale Luftfeuchtigkeit ein. Oberhalb der gewünschten Einstellung wird die Lüftung aktiviert.<br>Stelle die Zeit im Deaktivierungs Zeitplan ein, in der der Dämon das Relais nicht schaltet (wenn z.B. der Lärm deine Pflanzen beim schlafen stört). Format: Stunden, kommasepariert. 0,11 = 0:00 - 11:00';
-const _AIR_RH_SETTING_MIN = 'RH Minimum %';
-const _AIR_RH_SETTING_MAX = 'RH Maximum %';
-const _AIR_VENTILATION = 'Belüftung';
-const _AIR_VENTILATION_INFO = 'Ändere Einstellungen der Belüftung, die GPIO Pin Nummer deines Raspberry und die Position des Wertes der relativen Luftfeuchtigkeit in den <a href="/doc/#SENSORS">Sensordaten</a>.';
-const _AIR_QUIETHOURS = 'Deaktivierungs Zeitplan';
-
-/* cooling */
-const _COOLING = 'Licht Kühlung';
-const _COOLING_INFO = 'LED Leuchten können sehr heiss werden, um ihre Lebenszeit zu verlängern, solltest du einen Kühlkörper und einen Lüfter anbringen - welchen du hier konfigurieren kannst.';
+const _SETTINGS_MODE = 'Modus';
+const _SETTINGS_MAXON = 'Ein bei Maximalwert';
+const _SETTINGS_MAXOFF = 'Aus bei Maximalwert';
 
 /* frontend */
 const _FRONTEND = 'Frontend';
@@ -181,6 +170,8 @@ const _LIGHT_OPTIONS = 'Optionen';
 const _LIGHT_SLEEPUNTILSTORE = 'Zwischenspeichern (Sekunden)';
 const _LIGHT_SLEEPUNTILSTORE_INFO = 'Hier kannst du einstellen wie viele sekunden im Modus Tag gewartet werden soll, bis die verbleibende Zeit gespeichert wird.';
 const _LIGHT_SPECTRUM = 'Spektrum (Annäherung)';
+const _LIGHT_COOLING = 'Licht Kühlung';
+const _LIGHT_COOLING_INFO = 'LED Leuchten können sehr heiss werden, um ihre Lebenszeit zu verlängern, solltest du einen Kühlkörper und einen Lüfter anbringen - welchen du hier konfigurieren kannst.';
 
 /* network */
 const _NETWORK = 'Netzwerk';
@@ -223,6 +214,16 @@ const _SENSORS_CHANNEL = 'Kanal';
 const _SENSORS_SERIAL = 'Serieller Port';
 const _SENSORS_PATH = 'Pfad';
 
+/* air */
+const _AIR = 'Luft';
+const _AIR_INDEX = 'Die Position des Wertes der relativen Luftfeuchtigkeit in den Sensordaten';
+const _AIR_RH_INFO = 'Stelle die gewünschte maximale Luftfeuchtigkeit ein. Oberhalb der gewünschten Einstellung wird die Lüftung aktiviert.<br>Stelle die Zeit im Deaktivierungs Zeitplan ein, in der der Dämon das Relais nicht schaltet (wenn z.B. der Lärm deine Pflanzen beim schlafen stört). Format: Stunden, kommasepariert. 0,11 = 0:00 - 11:00';
+const _AIR_RH_SETTING_MIN = 'RH Minimum %';
+const _AIR_RH_SETTING_MAX = 'RH Maximum %';
+const _AIR_VENTILATION = 'Belüftung';
+const _AIR_VENTILATION_INFO = 'Ändere Einstellungen der Belüftung, die GPIO Pin Nummer deines Raspberry und die Position des Wertes der relativen Luftfeuchtigkeit in den <a href="/doc/#SENSORS">Sensordaten</a>.';
+const _AIR_QUIETHOURS = 'Deaktivierungs Zeitplan';
+
 /* water */
 const _WATER = 'Wasser';
 const _WATER_INDEX = 'Die Position des Bodenfeuchte Wertes in den Sensordaten';
@@ -233,6 +234,17 @@ const _WATER_MOIST_MAX = 'Maximum (in %)<br><small>(die Bewässerung wird deakti
 const _WATER_WATERING = 'Bewässerung';
 const _WATER_WATERING_INFO = 'Ändere Einstellungen der Bewässerung, die GPIO Pin Nummer deines Raspberry und die Position des Bodenfeuchte Wertes in den <a href="/doc/#SENSORS">Sensordaten</a>.';
 const _WATER_QUIETHOURS = 'Deaktivierungs Zeitplan';
+
+/* temperature */
+const _TEMPERATURE = 'Temperatur';
+const _TEMPERATURE_INDEX = 'Die Position des Temperatur Wertes in den Sensordaten';
+const _TEMPERATURE_MINMAX = 'Mindest-/Maximalwerte';
+const _TEMPERATURE_MINMAX_INFO = 'Hier kannst du die Kühlung einstellen, basierend auf dem Wert des Temperatur Sensors.<br>Stelle die Zeit im Deaktivierungs Zeitplan ein, in der der Dämon das Relais nicht schaltet (wenn z.B. der Lärm deine Pflanzen beim schlafen stört). Format: Stunden, kommasepariert. 0,11 = 0:00 - 11:00';
+const _TEMPERATURE_TEMP_MIN = 'Minimum (in &deg;C)<br><small>(die Kühlung wird deaktiviert)</small>';
+const _TEMPERATURE_TEMP_MAX = 'Maximum (in &deg;C)<br><small>(ab diesem Wert wird die Kühlung aktiviert)</small>';
+const _TEMPERATURE_COOLING = 'Kühlung';
+const _TEMPERATURE_COOLING_INFO = 'Ändere Einstellungen der Kühlung, die GPIO Pin Nummer deines Raspberry und die Position des Temperatur Wertes in den <a href="/doc/#SENSORS">Sensordaten</a>.';
+const _TEMPERATURE_QUIETHOURS = 'Deaktivierungs Zeitplan';
 
 /* doc */
 const _DOC = 'Dokumentation';
