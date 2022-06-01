@@ -15,7 +15,7 @@
 
 int main(int argc, char ** const argv) {
         char command[256];
-        char cmd[] = "/home/fox/growbox/backend/light.py -c ";
+        char cmd[] = "/home/fox/growbox/backend/light -c ";
         strcpy( command, cmd);
         strcpy( command+strlen(command), argv[1]);
         strcpy( command+strlen(command), " ");

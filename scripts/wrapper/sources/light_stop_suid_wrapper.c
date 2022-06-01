@@ -15,6 +15,6 @@
 
 int main() {
 	setuid(0);
-	system("/home/fox/growbox/backend/light.py -s");
+	system("/home/fox/growbox/backend/light -s");
 	return 0;
 }

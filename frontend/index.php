@@ -109,12 +109,12 @@ switch ($frontendContent) {
                         "water" => Cfg::read('water', 'pin')
                     };
                     if (array_key_exists('stop', $_POST)) {
-                        exec(Bootstrap::ROOTPATH . "/backend/gpio_toggle.py $pin 0");
+                        exec(Bootstrap::ROOTPATH . "/backend/gpio_toggle $pin 0");
                         $logMessage['text'] = $_POST['element']." => off";
                         Logger::write(LoggerAction::relayToggle,$logMessage);
 
                     } elseif (array_key_exists('start', $_POST)) {
-                        exec(Bootstrap::ROOTPATH . "/backend/gpio_toggle.py $pin 1");
+                        exec(Bootstrap::ROOTPATH . "/backend/gpio_toggle $pin 1");
                         $logMessage['text'] = $_POST['element']." => on";
                         Logger::write(LoggerAction::relayToggle,$logMessage);
                     }
