@@ -1,5 +1,5 @@
  <div class="w3-container w3-card w3-white w3-margin-bottom w3-round-large">
-        <h3><i class="fa fa-microchip w3-margin-right w3-padding-small"></i><?=_SENSORS;?></h3>
+        <h3><i class="fa fa-gauge w3-margin-right w3-padding-small"></i><?=_SENSORS;?></h3>
 
         <div class="w3-container w3-card w3-white w3-margin-bottom w3-round-large">
             <div class="w3-tag w3-white w3-right w3-margin-top" onclick="showHelp('activator')"><i class="fa fa-question-circle"></i></div>

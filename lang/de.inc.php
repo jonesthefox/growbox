@@ -126,6 +126,7 @@ const _LOGIN_LOGOUT_SUCCESSFUL = 'Logout erfolgreich. Tschüss!';
 
 /* settings */
 const _SETTINGS = 'Einstellungen';
+const _SETTINGS_CONFIGURATION = 'Konfiguration';
 const _SETTINGS_GPIO = 'Pin';
 const _SETTINGS_ATTACHED = 'Hardware verbunden';
 const _SETTINGS_MODE = 'Modus';
@@ -214,37 +215,40 @@ const _SENSORS_CHANNEL = 'Kanal';
 const _SENSORS_SERIAL = 'Serieller Port';
 const _SENSORS_PATH = 'Pfad';
 
+/* relay */
+const _RELAY = 'Relais Dämon';
+const _RELAY_INFO = 'Konfiguriere den Relais Dämon.<br>Stelle die Zeit im Deaktivierungs Zeitplan ein, in der der Dämon das Relais nicht schaltet (wenn z.B. der Lärm deine Pflanzen beim schlafen stört). Format: Stunden, kommasepariert. 0,11 = 0:00 - 11:00.<br>Setze die Zeit in Sekunden in der zwischen den Messungen gewartet werden soll.';
+const _RELAY_QUIETHOURS = 'Deaktivierungs Zeitplan';
+const _RELAY_SLEEP_BETWEEN_READINGS = 'Pause zwischen Messungen (Sekunden)';
+
 /* air */
 const _AIR = 'Luft';
 const _AIR_INDEX = 'Die Position des Wertes der relativen Luftfeuchtigkeit in den Sensordaten';
-const _AIR_RH_INFO = 'Stelle die gewünschte maximale Luftfeuchtigkeit ein. Oberhalb der gewünschten Einstellung wird die Lüftung aktiviert.<br>Stelle die Zeit im Deaktivierungs Zeitplan ein, in der der Dämon das Relais nicht schaltet (wenn z.B. der Lärm deine Pflanzen beim schlafen stört). Format: Stunden, kommasepariert. 0,11 = 0:00 - 11:00';
+const _AIR_RH_INFO = 'Stelle die gewünschte maximale Luftfeuchtigkeit ein. Oberhalb der gewünschten Einstellung wird die Lüftung aktiviert.';
 const _AIR_RH_SETTING_MIN = 'RH Minimum %';
 const _AIR_RH_SETTING_MAX = 'RH Maximum %';
 const _AIR_VENTILATION = 'Belüftung';
 const _AIR_VENTILATION_INFO = 'Ändere Einstellungen der Belüftung, die GPIO Pin Nummer deines Raspberry und die Position des Wertes der relativen Luftfeuchtigkeit in den <a href="/doc/#SENSORS">Sensordaten</a>.';
-const _AIR_QUIETHOURS = 'Deaktivierungs Zeitplan';
 
 /* water */
 const _WATER = 'Wasser';
 const _WATER_INDEX = 'Die Position des Bodenfeuchte Wertes in den Sensordaten';
 const _WATER_MINMAX = 'Mindest-/Maximalwerte';
-const _WATER_MINMAX_INFO = 'Hier kannst du die Bewässerung einstellen, basierend auf dem Wert des Bodenfeuchte Sensors.<br>Stelle die Zeit im Deaktivierungs Zeitplan ein, in der der Dämon das Relais nicht schaltet (wenn z.B. der Lärm deine Pflanzen beim schlafen stört). Format: Stunden, kommasepariert. 0,11 = 0:00 - 11:00';
+const _WATER_MINMAX_INFO = 'Hier kannst du die Bewässerung einstellen, basierend auf dem Wert des Bodenfeuchte Sensors.';
 const _WATER_MOIST_MIN = 'Minimum (in %)<br><small>(ab diesem Wert wird die Bewässerung aktiviert)</small>';
 const _WATER_MOIST_MAX = 'Maximum (in %)<br><small>(die Bewässerung wird deaktiviert)</small>';
 const _WATER_WATERING = 'Bewässerung';
 const _WATER_WATERING_INFO = 'Ändere Einstellungen der Bewässerung, die GPIO Pin Nummer deines Raspberry und die Position des Bodenfeuchte Wertes in den <a href="/doc/#SENSORS">Sensordaten</a>.';
-const _WATER_QUIETHOURS = 'Deaktivierungs Zeitplan';
 
 /* temperature */
 const _TEMPERATURE = 'Temperatur';
 const _TEMPERATURE_INDEX = 'Die Position des Temperatur Wertes in den Sensordaten';
 const _TEMPERATURE_MINMAX = 'Mindest-/Maximalwerte';
-const _TEMPERATURE_MINMAX_INFO = 'Hier kannst du die Kühlung einstellen, basierend auf dem Wert des Temperatur Sensors.<br>Stelle die Zeit im Deaktivierungs Zeitplan ein, in der der Dämon das Relais nicht schaltet (wenn z.B. der Lärm deine Pflanzen beim schlafen stört). Format: Stunden, kommasepariert. 0,11 = 0:00 - 11:00';
+const _TEMPERATURE_MINMAX_INFO = 'Hier kannst du die Kühlung einstellen, basierend auf dem Wert des Temperatur Sensors.';
 const _TEMPERATURE_TEMP_MIN = 'Minimum (in &deg;C)<br><small>(die Kühlung wird deaktiviert)</small>';
 const _TEMPERATURE_TEMP_MAX = 'Maximum (in &deg;C)<br><small>(ab diesem Wert wird die Kühlung aktiviert)</small>';
 const _TEMPERATURE_COOLING = 'Kühlung';
 const _TEMPERATURE_COOLING_INFO = 'Ändere Einstellungen der Kühlung, die GPIO Pin Nummer deines Raspberry und die Position des Temperatur Wertes in den <a href="/doc/#SENSORS">Sensordaten</a>.';
-const _TEMPERATURE_QUIETHOURS = 'Deaktivierungs Zeitplan';
 
 /* doc */
 const _DOC = 'Dokumentation';

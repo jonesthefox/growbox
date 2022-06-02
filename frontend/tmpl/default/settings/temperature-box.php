@@ -56,10 +56,6 @@
                     <td> <input class="w3-right" type="number" min="0" max="100" step="0.1" style="width: 80px;" value="<?=Cfg::read('temperature','max');?>" id="temperature[max]" name="temperature[max]" required></td>
                 </tr>
                 <tr>
-                    <td><label for="temperature[quiet_hours]"><?=_TEMPERATURE_QUIETHOURS;?></label></td>
-                    <td> <input class="w3-right w3-margin-bottom" type="text" min="0" max="100" style="width: 80px;" value="<?=Cfg::read('temperature','quiet_hours');?>" id="temperature[quiet_hours]" name="temperature[quiet_hours]" required></td>
-                </tr
-                <tr>
                     <td><input type="hidden" name="op" value="updateConfig"></td>
                     <td><button class="w3-button w3-border w3-round-large w3-right w3-margin-bottom" type="submit"><?=_FORM_CHANGE;?></button></td>
                 </tr>

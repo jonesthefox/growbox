@@ -137,7 +137,7 @@ def configfile(cfg: str = "config") -> str:
     return file
 
 
-def setup(daemon: str) -> tuple[str, str, str, int, float]:
+def setup(daemon: str) -> tuple[str, str, str, int]:
     """
     returns pid-,run- and logfile of the set daemon, the sensordaemon id and the sleep between iterations value
 
@@ -147,12 +147,10 @@ def setup(daemon: str) -> tuple[str, str, str, int, float]:
     """
     config = configparser.ConfigParser()
     config.read(configfile())
-    result = ("{}/tmp/{}".format(config['default']['rootpath'], config[daemon]['pidfile']),
-        "{}/tmp/{}".format(config['default']['rootpath'], config[daemon]['runfile']),
+    result = ("{}/tmp/{}.pid".format(config['default']['rootpath'], daemon),
+        "{}/tmp/{}.run".format(config['default']['rootpath'], daemon),
         "{}/log/growbox.log".format(config['default']['rootpath']),
-        int(config['sensordaemon']['sensordaemon_id']),
-        float(config[daemon]['sleep_between_readings']))
-
+        int(config['sensordaemon']['sensordaemon_id']))
     return result
 
 

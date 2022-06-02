@@ -56,10 +56,6 @@
                     <td> <input class="w3-right" type="number" min="0" max="100" step="0.1" style="width: 80px;" value="<?=Cfg::read('air','max');?>" id="air[max]" name="air[max]" required></td>
                 </tr>
                 <tr>
-                    <td><label for="air[quiet_hours]"><?=_AIR_QUIETHOURS;?></label></td>
-                    <td> <input class="w3-right w3-margin-bottom" type="text" min="0" max="100" style="width: 80px;" value="<?=Cfg::read('air','quiet_hours');?>" id="air[quiet_hours]" name="air[quiet_hours]" required></td>
-                </tr
-                <tr>
                     <td><input type="hidden" name="op" value="updateConfig"></td>
                     <td><button class="w3-button w3-border w3-round-large w3-right w3-margin-bottom" type="submit"><?=_FORM_CHANGE;?></button></td>
                 </tr>

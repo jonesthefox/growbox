@@ -70,7 +70,7 @@ def on(element: str, gpio: int, runfile: str, logfile: str, debug: bool):
     checkstate(runfile, "w", str(1))
     GPIO.output(gpio, 1)
     logwrite(element, logfile, "relay started")
-    debugmessage("Relay started", debug)
+    debugmessage("status: relay started", debug)
 
 
 def off(element: str, gpio: int, runfile: str, logfile: str, debug: bool):
@@ -86,7 +86,48 @@ def off(element: str, gpio: int, runfile: str, logfile: str, debug: bool):
     checkstate(runfile, "w", str(0))
     GPIO.output(gpio, 0)
     logwrite(element, logfile, "relay stopped")
-    debugmessage("Relay stopped", debug)
+    debugmessage("status: relay stopped", debug)
+
+
+def decider(value: float, minval: float, maxval: float, mode: str) -> bool:
+    """
+    Function to decide if relay should be turned on or off.
+
+    :param value: The measured sensor value
+    :param minval: the minimum value
+    :param maxval: the maximum value
+    :param mode: 'maxon' -> turns the relay on, when the value is above maximum, off when under minimum
+                 'maxoff'-> turns the relay off, when the value is above minimum, on when under minimum
+                 both modes turn the relay off, when the value is in range of minval and maxval
+    :rtype: bool
+    :return: true -> the relay should turn on, false -> the relay should turn off
+    """
+
+    if mode == 'max-off':
+        if minval <= value <= maxval:
+            debugmessage("decision: turn off because value is in range min - max", DEBUG)
+            return False
+
+        elif value < minval:
+            debugmessage("decision: turn on because value < min", DEBUG)
+            return True
+
+        elif value > maxval:
+            debugmessage("decision: turn off because value > max", DEBUG)
+            return False
+
+    elif mode == 'max-on':
+        if minval <= value <= maxval:
+            debugmessage("decision: turn off because value is in range min - max", DEBUG)
+            return False
+
+        elif value < minval:
+            debugmessage("decision: turn off because value < min", DEBUG)
+            return False
+
+        elif value > maxval:
+            debugmessage("decision: turn on because value > max", DEBUG)
+            return True
 
 
 def daemon(element: str, pin: Union[Pin, Pin, Pin, Pin, Pin, Pin, Pin, int], pidfile: str, runfile: str, logfile: str) -> None:
@@ -101,62 +142,47 @@ def daemon(element: str, pin: Union[Pin, Pin, Pin, Pin, Pin, Pin, Pin, int], pid
     :rtype: None
     """
 
+    debugmessage("reading sensordata from shm..\n", DEBUG)
     while True:
         try:
-            debugmessage("===================================================================", DEBUG)
-            debugmessage("reading sensordata from shm..", DEBUG)
+            debugmessage("========================================================", DEBUG)
 
             sensordata = str(readshm(sensordaemon_id))
             sensordata = sensordata.split(' ')
             config.read(configfile())
 
-            index = int(config[element]['index'])
-            mode = config[DAEMON]['relay_mode']
-            quiet_hours = config[DAEMON]['quiet_hours'].split(',')
+            sleep_between_readings = float(config['relay']['sleep_between_readings'])
+            quiet_hours = config['relay']['quiet_hours'].split(',')
 
-            if mode == "max-off":
-                debugmessage("{} measured value={} threshold min={}, threshold max={}".format(sensordata[0], sensordata[index], config[DAEMON]['min'], config[DAEMON]['max']), DEBUG)
-                if not quiethours(datetime.now().time(), time(int(quiet_hours[0])), time(int(quiet_hours[1]))):
-                    if float(sensordata[index]) < float(config[element]['min']):
-                        if not checkstate(runfile, "r"):
-                            debugmessage("Relay off, turning on now because measured value={} (threshold={})".format(sensordata[index], config[DAEMON]['min']), DEBUG)
-                            on(element, pin, runfile, logfile, DEBUG)
-                        else:
-                            debugmessage("Relay already on", DEBUG)
+            mode = config[element]['relay_mode']
+            minval = float(config[element]['min'])
+            maxval = float(config[element]['max'])
 
-                    elif float(sensordata[index]) > float(config[element]['max']):
-                        if checkstate(runfile, "r"):
-                            debugmessage("Turning Relay off now because measured value={} (threshold={})".format(sensordata[index], config[DAEMON]['max']), DEBUG)
-                            off(element, pin, runfile, logfile, DEBUG)
-                        else:
-                            debugmessage("Relay already off", DEBUG)
+            value = float(sensordata[int(config[element]['index'])])
+            timestamp = sensordata[0] + ' ' + sensordata[1]
+
+            debugmessage("{}\n{} (min={}, max={})".format(timestamp, value, minval, maxval), DEBUG)
+            debugmessage("........................................................", DEBUG)
+            if not quiethours(datetime.now().time(), time(int(quiet_hours[0])), time(int(quiet_hours[1]))):
+                if decider(value, minval, maxval, mode):
+                    if not checkstate(runfile, "r"):
+                        on(element, pin, runfile, logfile, DEBUG)
+                    else:
+                        debugmessage("status: relay already on", DEBUG)
+
                 else:
-                    if checkstate(runfile, 'r'):
-                        off(element, RELAY_GPIO, runfile, logfile, DEBUG)
-                    debugmessage("No action (quiet hour)", DEBUG)
+                    if checkstate(runfile, "r"):
+                        off(element, pin, runfile, logfile, DEBUG)
+                    else:
+                        debugmessage("status: relay already off", DEBUG)
 
-            elif mode == "max-on":
-                debugmessage("{} measured value={} threshold min={}, threshold max={}".format(sensordata[0], sensordata[index], config[DAEMON]['min'], config[DAEMON]['max']), DEBUG)
-                if not quiethours(datetime.now().time(), time(int(quiet_hours[0])), time(int(quiet_hours[1]))):
-                    if float(sensordata[index]) > float(config[element]['max']):
-                        if not checkstate(runfile, "r"):
-                            debugmessage("Relay off, turning on now because measured value={} (threshold={})".format(sensordata[index], config[DAEMON]['max']), DEBUG)
-                            on(element, pin, runfile, logfile, DEBUG)
-                        else:
-                            debugmessage("Relay already on", DEBUG)
-
-                    elif float(sensordata[index]) < float(config[element]['min']):
-                        if checkstate(runfile, "r"):
-                            debugmessage("Turning Relay off now  because measured value={} (threshold={})".format(sensordata[index], config[DAEMON]['min']), DEBUG)
-                            off(element, pin, runfile, logfile, DEBUG)
-                        else:
-                            debugmessage("Relay already off", DEBUG)
-                else:
-                    if checkstate(runfile, 'r'):
-                        off(element, RELAY_GPIO, runfile, logfile, DEBUG)
-                    debugmessage("No action (quiet hour)", DEBUG)
+            else:
+                if checkstate(runfile, 'r'):
+                    off(element, RELAY_GPIO, runfile, logfile, DEBUG)
+                debugmessage("No action (quiet hour)", DEBUG)
 
             debugmessage("sleeping {} sec until next iteration".format(sleep_between_readings), DEBUG)
+            debugmessage("--------------------------------------------------------\n", DEBUG)
             sleep(sleep_between_readings)
 
         except KeyboardInterrupt:
@@ -199,7 +225,7 @@ if __name__ == '__main__':
         config = configparser.ConfigParser()
         config.read(configfile())
 
-        pid, runf, log, sensordaemon_id, sleep_between_readings = setup(DAEMON)
+        pid, runf, log, sensordaemon_id = setup(DAEMON)
 
         GPIO.setmode(GPIO.BCM)
         RELAY_GPIO = getpin(int(config[DAEMON]['pin']), returntype='bcm')
@@ -212,8 +238,8 @@ if __name__ == '__main__':
         else:
             # sleep 5 seconds that the sensordaemon can read the sensors and write to the shm
             # to ensure we can read something from shm in case of a reboot
-            debugmessage("Sleeping 5 seconds to ensure there is data in SHM..", DEBUG)
-            sleep(5)
+            #debugmessage("Sleeping 5 seconds to ensure there is data in SHM..", DEBUG)
+            #sleep(5)
             daemon(DAEMON, RELAY_GPIO, pid, runf, log)
             # runs forever
 

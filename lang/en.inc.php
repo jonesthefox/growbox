@@ -126,6 +126,7 @@ const _LOGIN_LOGOUT_SUCCESSFUL = 'Logout successful. Bye!';
 
 /* settings */
 const _SETTINGS = 'Settings';
+const _SETTINGS_CONFIGURATION = 'Configuration';
 const _SETTINGS_GPIO = 'Pin';
 const _SETTINGS_ATTACHED = 'Hardware attached';
 const _SETTINGS_MODE = 'Mode';
@@ -214,37 +215,40 @@ const _SENSORS_CHANNEL = 'Channel';
 const _SENSORS_SERIAL = 'Serial Port';
 const _SENSORS_PATH = 'Path';
 
+/* relay */
+const _RELAY = 'Relay Daemon';
+const _RELAY_INFO = 'Configure the relay daemon.<br>Set the time in the deactivation schedule in which the daemon does not switch the relay (e.g. if the noise disturbs your plants while sleeping). Format: hours, comma separated. 0,11 = 0:00 - 11:00.<br>Set the time in seconds to wait between measurements.';
+const _RELAY_QUIETHOURS = 'Deactivation schedule';
+const _RELAY_SLEEP_BETWEEN_READINGS = 'Pause between measurings (seconds)';
+
 /* air */
 const _AIR = 'Air';
 const _AIR_INDEX = 'The position of the relative humidity value in the sensordata';
-const _AIR_RH_INFO = 'Set the desired humidity. Above the desired value, the ventilation will be activated.<br>Set the time in the deactivation schedule, when the daemon does not switch the relay (e.g. if the noise disturbs your plants while sleeping). Format: hours, comma separated. 0,11 = 0:00 - 11:00';
+const _AIR_RH_INFO = 'Set the desired humidity. Above the desired value, the ventilation will be activated.';
 const _AIR_RH_SETTING_MIN = 'RH Minimum %';
 const _AIR_RH_SETTING_MAX = 'RH Maximum %';
 const _AIR_VENTILATION = 'Ventilation';
 const _AIR_VENTILATION_INFO = 'Change ventilation Settings, the GPIO pin number of your raspberry and the index of the relative humidity in the <a href="/doc/#SENSORS">sensordata</a>.';
-const _AIR_QUIETHOURS = 'Deactivation schedule';
 
 /* water */
 const _WATER = 'Water';
 const _WATER_INDEX = 'The position of the soil moisture value in the sensordata';
 const _WATER_MINMAX = 'Min-/maximum values';
-const _WATER_MINMAX_INFO = 'Here you can adjust watering settings, based on the soil moisture sensore value.<br>Set the time in the deactivation schedule, when the daemon does not switch the relay (e.g. if the noise disturbs your plants while sleeping). Format: hours, comma separated. 0,11 = 0:00 - 11:00';
+const _WATER_MINMAX_INFO = 'Here you can adjust watering settings, based on the soil moisture sensore value.';
 const _WATER_MOIST_MIN = 'Minimum (in %)<br><small>(reaching this value triggers the watering)</small>';
 const _WATER_MOIST_MAX = 'Maximum (in %)<br><small>(the watering stops)</small>';
 const _WATER_WATERING = 'Watering';
 const _WATER_WATERING_INFO = 'Change watering settings, the GPIO pin number of your raspberry and the index of the soil moisture value in the <a href="/doc/#SENSORS">sensordata</a>.';
-const _WATER_QUIETHOURS = 'Deactivation schedule';
 
 /* temperature */
 const _TEMPERATURE = 'Temperature';
 const _TEMPERATURE_INDEX = 'The position of the temperature value in the sensordata';
 const _TEMPERATURE_MINMAX = 'Min-/maximum values';
-const _TEMPERATURE_MINMAX_INFO = 'Here you can adjust cooling settings, based on the temperature sensore value.<br>Set the time in the deactivation schedule, when the daemon does not switch the relay (e.g. if the noise disturbs your plants while sleeping). Format: hours, comma separated. 0,11 = 0:00 - 11:00';
+const _TEMPERATURE_MINMAX_INFO = 'Here you can adjust cooling settings, based on the temperature sensore value.';
 const _TEMPERATURE_TEMP_MIN = 'Minimum (in &deg;C)<br><small>(the cooling stops)</small>';
 const _TEMPERATURE_TEMP_MAX = 'Maximum (in &deg;C)<br><small>(reaching this value triggers the cooling)</small>';
 const _TEMPERATURE_COOLING = 'Cooling';
 const _TEMPERATURE_COOLING_INFO = 'Change cooling settings, the GPIO pin number of your raspberry and the index of the soil moisture value in the <a href="/doc/#SENSORS">sensordata</a>.';
-const _TEMPERATURE_QUIETHOURS = 'Deactivation schedule';
 
 /* doc */
 const _DOC = 'Documentation';
