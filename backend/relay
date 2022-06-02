@@ -105,28 +105,28 @@ def decider(value: float, minval: float, maxval: float, mode: str) -> bool:
 
     if mode == 'max-off':
         if minval <= value <= maxval:
-            debugmessage("decision: turn off because value is in range min - max", DEBUG)
+            debugmessage("decision: off. value in min/max range", DEBUG)
             return False
 
         elif value < minval:
-            debugmessage("decision: turn on because value < min", DEBUG)
+            debugmessage("decision: on. value < min", DEBUG)
             return True
 
         elif value > maxval:
-            debugmessage("decision: turn off because value > max", DEBUG)
+            debugmessage("decision: off. value > max", DEBUG)
             return False
 
     elif mode == 'max-on':
         if minval <= value <= maxval:
-            debugmessage("decision: turn off because value is in range min - max", DEBUG)
+            debugmessage("decision: off. value in min/max range", DEBUG)
             return False
 
         elif value < minval:
-            debugmessage("decision: turn off because value < min", DEBUG)
+            debugmessage("decision: off. value < min", DEBUG)
             return False
 
         elif value > maxval:
-            debugmessage("decision: turn on because value > max", DEBUG)
+            debugmessage("decision: on. value > max", DEBUG)
             return True
 
 
@@ -145,7 +145,7 @@ def daemon(element: str, pin: Union[Pin, Pin, Pin, Pin, Pin, Pin, Pin, int], pid
     debugmessage("reading sensordata from shm..\n", DEBUG)
     while True:
         try:
-            debugmessage("========================================================", DEBUG)
+            debugmessage("===growbox relay daemon===============\n", DEBUG)
 
             sensordata = str(readshm(sensordaemon_id))
             sensordata = sensordata.split(' ')
@@ -162,7 +162,7 @@ def daemon(element: str, pin: Union[Pin, Pin, Pin, Pin, Pin, Pin, Pin, int], pid
             timestamp = sensordata[0] + ' ' + sensordata[1]
 
             debugmessage("{}\n{} (min={}, max={})".format(timestamp, value, minval, maxval), DEBUG)
-            debugmessage("........................................................", DEBUG)
+            debugmessage("......................................", DEBUG)
             if not quiethours(datetime.now().time(), time(int(quiet_hours[0])), time(int(quiet_hours[1]))):
                 if decider(value, minval, maxval, mode):
                     if not checkstate(runfile, "r"):
@@ -181,8 +181,8 @@ def daemon(element: str, pin: Union[Pin, Pin, Pin, Pin, Pin, Pin, Pin, int], pid
                     off(element, RELAY_GPIO, runfile, logfile, DEBUG)
                 debugmessage("No action (quiet hour)", DEBUG)
 
-            debugmessage("sleeping {} sec until next iteration".format(sleep_between_readings), DEBUG)
-            debugmessage("--------------------------------------------------------\n", DEBUG)
+            debugmessage("sleeping until next iteration", DEBUG)
+            debugmessage("--------------------------------------\n", DEBUG)
             sleep(sleep_between_readings)
 
         except KeyboardInterrupt:
@@ -236,10 +236,9 @@ if __name__ == '__main__':
             exit(0)
 
         else:
-            # sleep 5 seconds that the sensordaemon can read the sensors and write to the shm
+            # sleep 3 seconds that the sensordaemon can read the sensors and write to the shm
             # to ensure we can read something from shm in case of a reboot
-            #debugmessage("Sleeping 5 seconds to ensure there is data in SHM..", DEBUG)
-            #sleep(5)
+            sleep(3)
             daemon(DAEMON, RELAY_GPIO, pid, runf, log)
             # runs forever
 
