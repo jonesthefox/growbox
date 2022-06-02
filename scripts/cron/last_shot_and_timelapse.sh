@@ -14,16 +14,16 @@ CAMERA=$(awk -F "=" '/camera/ {print $2}' "$CONFIG")
 
 DATENICE=$(date +"%Y-%m-%d %H:%M")
 
-readarray -d " " -t SENSORDATA < <( "$ROOTPATH"/backend/sensors.py -o )
+readarray -d " " -t SENSORDATA < <( "$ROOTPATH"/backend/sensors -o )
 
 rm "$ROOTPATH"/frontend/projects/"$ID"/latest.jpg
 
-python3 "$ROOTPATH"/scripts/python/light.py -s
-python3 "$ROOTPATH"/scripts/python/light.py -c 0 0 0 255
+python3 "$ROOTPATH"/scripts/python/light -s
+python3 "$ROOTPATH"/scripts/python/light -c 0 0 0 255
 
 $CAMERA -t 1 -n --width "$WIDTH" --height "$HEIGHT" --awb "$AWB" -q "$QUALITY" -o "$ROOTPATH"/frontend/projects/"$ID"/latest.jpg 2>/dev/null
 
-python3 "$ROOTPATH"/scripts/python/light.py -s
+python3 "$ROOTPATH"/scripts/python/light -s
 
 cp "$ROOTPATH"/frontend/projects/"$ID"/latest.jpg "$ROOTPATH"/frontend/projects/"$ID"/project.jpg
 convert -sharpen 0x5 "$ROOTPATH"/frontend/projects/"$ID"/project.jpg "$ROOTPATH"/frontend/projects/"$ID"/project.jpg

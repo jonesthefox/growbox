@@ -28,7 +28,7 @@ CAMERA=$(awk -F "=" '/camera/ {print $2}' "$CONFIG")
 DATE=$(date +"%Y-%m-%d_%H%M")
 DATENICE=$(date +"%Y-%m-%d %H:%M")
 
-readarray -d " " -t SENSORDATA < <( "$ROOTPATH"/backend/sensors.py -o )
+readarray -d " " -t SENSORDATA < <( "$ROOTPATH"/backend/sensors -o )
 
 rm "$ROOTPATH"/frontend/projects/"$ID"/latest.jpg
 
