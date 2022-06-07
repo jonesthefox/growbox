@@ -22,6 +22,8 @@ import os
 import sys
 from time import sleep
 
+DEBUG = False
+QUIET = False
 
 def quiethours(now: time, starttime: time, endtime: time) -> bool:
     """
@@ -69,7 +71,8 @@ def on(element: str, gpio: int, runfile: str, logfile: str, debug: bool):
     """
     checkstate(runfile, "w", str(1))
     GPIO.output(gpio, 1)
-    logwrite(element, logfile, "relay started")
+    if not QUIET:
+        logwrite(element, logfile, "relay {} started".format(element))
     debugmessage("status: relay started", debug)
 
 
@@ -85,7 +88,8 @@ def off(element: str, gpio: int, runfile: str, logfile: str, debug: bool):
     """
     checkstate(runfile, "w", str(0))
     GPIO.output(gpio, 0)
-    logwrite(element, logfile, "relay stopped")
+    if not QUIET:
+        logwrite(element, logfile, "relay {} stopped".format(element))
     debugmessage("status: relay stopped", debug)
 
 
@@ -188,13 +192,13 @@ def daemon(element: str, pin: Union[Pin, Pin, Pin, Pin, Pin, Pin, Pin, int], pid
         except KeyboardInterrupt:
             debugmessage("Interrupt", DEBUG)
             end(element, RELAY_GPIO, pidfile, runfile, logfile, DEBUG)
-            logwrite(element, logfile, "stopped by SIGINT")
+            logwrite(element, logfile, "relay {} stopped by SIGINT".format(element))
             sys.exit(0)
 
         except SystemExit:
             debugmessage("Terminated", DEBUG)
             end(element, RELAY_GPIO, pidfile, runfile, logfile, DEBUG)
-            logwrite(element, logfile, "stopped by SIGTERM")
+            logwrite(element, logfile, "relay {} stopped by SIGTERM".format(element))
             sys.exit(0)
 
 
@@ -203,7 +207,11 @@ if __name__ == '__main__':
     group = parser.add_mutually_exclusive_group()
     parser.add_argument("-v", "--verbose",
                         action="store_true",
-                        help='''debug increase output verbosity to stdout. don't do that in production.''')
+                        help='''increase output verbosity to stdout. don't do that in production.''')
+
+    parser.add_argument("-q", "--quiet",
+                        action="store_true",
+                        help='''decrease log output''')
 
     group.add_argument("-d", "--daemon",
                        type=str, choices=["air", "water", "temperature"],
@@ -217,8 +225,9 @@ if __name__ == '__main__':
 
     if args.verbose:
         DEBUG = True
-    else:
-        DEBUG = False
+
+    if args.quiet:
+        QUIET = True
 
     if args.daemon:
         DAEMON = args.daemon
